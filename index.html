@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Color Calendar</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="cal">
+        <div class="cal-header">
+          <button class="btn btn-prev">
+            <img src="./img/arrow-left.svg" alt="" />
+          </button>
+          <div class="cal-header-date">
+            <p class="cal-header-month"></p>
+            <p class="cal-header-day"></p>
+          </div>
+          <button class="btn btn-next">
+            <img src="./img/arrow-right.svg" alt="" />
+          </button>
+        </div>
+        <div class="cal-body">
+          <div class="cal-body-daynames">
+            <p class="dayname">Sun</p>
+            <p class="dayname">Mon</p>
+            <p class="dayname">Tue</p>
+            <p class="dayname">Wed</p>
+            <p class="dayname">Thu</p>
+            <p class="dayname">Fri</p>
+            <p class="dayname">Sat</p>
+          </div>
+          <div class="cal-body-daynums"></div>
+        </div>
+      </div>
+
+      <div class="clrmenu">
+        <div
+          data-clr="clrGray"
+          class="clrOption clrGray clrOption--current"
+        ></div>
+        <div data-clr="clrRed" class="clrOption clrRed"></div>
+        <div data-clr="clrYellow" class="clrOption clrYellow"></div>
+        <div data-clr="clrGreen" class="clrOption clrGreen"></div>
+        <div data-clr="clrBlue" class="clrOption clrBlue"></div>
+        <div data-clr="clrIndigo" class="clrOption clrIndigo"></div>
+        <div data-clr="clrPink" class="clrOption clrPink"></div>
+      </div>
+    </div>
+    <!--  -->
+    <script src="app.js"></script>
+  </body>
+</html>
