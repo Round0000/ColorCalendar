@@ -1,3 +1,23 @@
+// Data storage
+let markedDates = {};
+
+const saveDate = () => {
+  const regex = /clr/gm;
+  document.querySelectorAll(".daynum").forEach((item) => {
+    if (regex.test(item.classList[1]) || regex.test(item.classList[2])) {
+      markedDates[item.dataset.date] = item.classList[1];
+    } else if (
+      !regex.test(item.classList[1]) ||
+      regex.test(item.classList[2])
+    ) {
+      delete markedDates[item.dataset.date];
+    }
+  });
+  // localStorage.setItem("markedDates", JSON.stringify(markedDates));
+  console.log(markedDates);
+};
+//
+
 let currentClr = "clrGray";
 
 const clrOptions = document.querySelectorAll(".clrOption");
@@ -27,11 +47,13 @@ btnNext.addEventListener("click", (e) => {
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("daynum")) {
     e.target.classList.toggle(currentClr);
+
     e.target.classList.forEach((item) => {
       if (item !== "daynum" && item !== "today" && item !== currentClr) {
         e.target.classList.remove(item);
       }
     });
+    saveDate();
   }
 
   if (e.target.classList.contains("clrOption")) {
@@ -86,30 +108,47 @@ const outputCal = () => {
 
   document.querySelector(".cal-header-month").innerHTML =
     months[date.getMonth()];
-  document.querySelector(".cal-header-day").innerHTML = date.toDateString();
+  document.querySelector(
+    ".cal-header-day"
+  ).innerHTML = new Date().toDateString();
 
-  let days = "";
+  let days = [];
 
   for (let x = firstDayIndex; x > 0; x--) {
-    days += `<p class="pastdaynum">${prevLastDay - x + 1}</p>`;
+    const pPast = document.createElement("P");
+    pPast.classList.add("pastdaynum");
+    pPast.innerHTML = prevLastDay - x + 1;
+    days.push(pPast);
   }
 
   for (let i = 1; i <= lastDay; i++) {
+    const pCurrent = document.createElement("P");
+    pCurrent.classList.add("daynum");
+    pCurrent.dataset.date = `${date.getFullYear()}-${date.getMonth()}-${i}`;
+
+    if (markedDates[pCurrent.dataset.date]) {
+      pCurrent.classList.add(markedDates[pCurrent.dataset.date]);
+    }
+
+    pCurrent.innerHTML = i;
     if (
       i === new Date().getDate() &&
       date.getMonth() === new Date().getMonth()
     ) {
-      days += `<p class="daynum today">${i}</p>`;
-    } else {
-      days += `<p class="daynum">${i}</p>`;
+      pCurrent.classList.add("today");
     }
-    monthDays.innerHTML = days;
+
+    days.push(pCurrent);
   }
 
   for (let j = 1; j <= nextDays; j++) {
-    days += `<div class="futuredaynum">${j}</div>`;
-    monthDays.innerHTML = days;
+    const pNext = document.createElement("P");
+    pNext.classList.add("futuredaynum");
+    pNext.innerHTML = j;
+    days.push(pNext);
   }
+  monthDays.innerHTML = "";
+  days.forEach((day) => monthDays.append(day));
 };
 
 // Initial Calendar Output
