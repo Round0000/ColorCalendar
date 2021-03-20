@@ -109,7 +109,7 @@ body {
   color: #666;
 }
 
-.today {
+#today {
   outline: 2px dotted rgb(234, 255, 140);
   outline-offset: -2px;
   color: rgb(234, 255, 140);
@@ -162,7 +162,7 @@ body {
 }
 
 /*  */
-#save {
+#reset {
   display: block;
   margin: auto;
   padding: 0.5em 1em;

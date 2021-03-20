@@ -2,20 +2,21 @@
 let markedDates = {};
 
 const saveDate = () => {
-  const regex = /clr/gm;
   document.querySelectorAll(".daynum").forEach((item) => {
-    if (regex.test(item.classList[1]) || regex.test(item.classList[2])) {
+    if (item.classList[1]) {
       markedDates[item.dataset.date] = item.classList[1];
-    } else if (
-      !regex.test(item.classList[1]) ||
-      regex.test(item.classList[2])
-    ) {
+    } else if (markedDates[item.dataset.date]) {
       delete markedDates[item.dataset.date];
     }
   });
-  // localStorage.setItem("markedDates", JSON.stringify(markedDates));
-  console.log(markedDates);
+  localStorage.setItem("markedDates", JSON.stringify(markedDates));
 };
+
+// Erase data from Local Storage
+const reset = document.querySelector("#reset");
+reset.addEventListener("click", () => {
+  localStorage.clear();
+});
 //
 
 let currentClr = "clrGray";
@@ -49,7 +50,7 @@ document.addEventListener("click", (e) => {
     e.target.classList.toggle(currentClr);
 
     e.target.classList.forEach((item) => {
-      if (item !== "daynum" && item !== "today" && item !== currentClr) {
+      if (item !== "daynum" && item !== currentClr) {
         e.target.classList.remove(item);
       }
     });
@@ -135,7 +136,7 @@ const outputCal = () => {
       i === new Date().getDate() &&
       date.getMonth() === new Date().getMonth()
     ) {
-      pCurrent.classList.add("today");
+      pCurrent.id = "today";
     }
 
     days.push(pCurrent);
@@ -147,9 +148,17 @@ const outputCal = () => {
     pNext.innerHTML = j;
     days.push(pNext);
   }
+
   monthDays.innerHTML = "";
   days.forEach((day) => monthDays.append(day));
+  console.log(markedDates);
 };
 
 // Initial Calendar Output
+if (localStorage.getItem("markedDates")) {
+  markedDates = JSON.parse(
+    localStorage.getItem("markedDates", JSON.stringify(markedDates))
+  );
+}
+
 outputCal();
