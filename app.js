@@ -1,16 +1,20 @@
 // PWA Service Worker
-if (navigator.serviceWorker) {
+const ASSETS = [
+  "./fonts/fira-sans-v10-latin-300.woff2",
+  "./fonts/fira-sans-v10-latin-300.wof",
+  "./fonts/fira-sans-v10-latin-regular.woff2",
+  "./fonts/fira-sans-v10-latin-regular.woff",
+  "./img/arrow-left.svg",
+  "./img/arrow-right.svg",
+  "/style.css",
+  "/index.html",
+  "/",
+];
+
+if ("serviceWorker" in navigator) {
   navigator.serviceWorker
-    .register("/sw.js")
-    .then(function (registration) {
-      console.log(
-        "ServiceWorker registration successful with scope:",
-        registration.scope
-      );
-    })
-    .catch(function (error) {
-      console.log("ServiceWorker registration failed:", error);
-    });
+    .register("sw.js")
+    .then(() => console.log("registered service worker!"));
 }
 
 // Data storage
