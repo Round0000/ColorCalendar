@@ -114,7 +114,7 @@ body {
   cursor: pointer;
   text-shadow: 0px 1px 3px #000;
   transition: all 0.2s;
-  font-weight: bold;
+  font-weight: bolder;
 }
 
 .pastdaynum,
@@ -189,9 +189,11 @@ body {
 /* Media queries */
 @media (min-width: 640px) {
   .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100vh;
+    margin-top: 5vh;
+  }
+
+  .cal-body-daynames *,
+  .cal-body-daynums * {
+    padding: 1em 0;
   }
 }
