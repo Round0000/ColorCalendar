@@ -1,3 +1,9 @@
+self.addEventListener("install", (e) => {
+  console.log("[Service Worker] Install");
+});
+
+const cacheName = "ColorCal";
+
 const assets = [
   "/fonts/fira-sans-v10-latin-300.woff2",
   "/fonts/fira-sans-v10-latin-300.woff",
@@ -11,30 +17,30 @@ const assets = [
   "/",
 ];
 
-const staticCacheName = "ColorCal";
-
-self.addEventListener("install", (event) => {
-  console.log("Attempting to install service worker and cache static assets");
-  event.waitUntil(
-    caches.open(staticCacheName).then((cache) => {
-      return cache.addAll(assets);
-    })
+self.addEventListener("install", (e) => {
+  console.log("[Service Worker] Install");
+  e.waitUntil(
+    (async () => {
+      const cache = await caches.open(cacheName);
+      console.log("[Service Worker] Caching all: app shell and content");
+      await cache.addAll(assets);
+    })()
   );
 });
 
-self.addEventListener("fetch", (event) => {
-  console.log("Fetch event for ", event.request.url);
-  event.respondWith(
-    caches
-      .match(event.request)
-      .then((response) => {
-        if (response) {
-          console.log("Found ", event.request.url, " in cache");
-          return response;
-        }
-        console.log("Network request for ", event.request.url);
-        return fetch(event.request);
-      })
-      .catch((error) => {})
+self.addEventListener("fetch", (e) => {
+  e.respondWith(
+    (async () => {
+      const r = await caches.match(e.request);
+      console.log(`[Service Worker] Fetching resource: ${e.request.url}`);
+      if (r) {
+        return r;
+      }
+      const response = await fetch(e.request);
+      const cache = await caches.open(cacheName);
+      console.log(`[Service Worker] Caching new resource: ${e.request.url}`);
+      cache.put(e.request, response.clone());
+      return response;
+    })()
   );
 });

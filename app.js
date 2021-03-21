@@ -1,9 +1,7 @@
 // PWA Service Worker
 
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker
-    .register("sw.js")
-    .then(() => console.log("registered service worker!"));
+  navigator.serviceWorker.register("./sw.js");
 }
 
 // Data storage
