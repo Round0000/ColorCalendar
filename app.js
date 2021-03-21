@@ -9,8 +9,9 @@ let markedDates = {};
 
 const saveDate = () => {
   document.querySelectorAll(".daynum").forEach((item) => {
-    if (item.classList[1]) {
-      markedDates[item.dataset.date] = item.classList[1];
+    if (item.classList.length > 1) {
+      markedDates[item.dataset.date] =
+        [item.classList[1]] + " " + [item.classList[2]];
     } else if (markedDates[item.dataset.date]) {
       delete markedDates[item.dataset.date];
     }
@@ -21,11 +22,12 @@ const saveDate = () => {
 // Erase data from Local Storage
 const reset = document.querySelector("#reset");
 reset.addEventListener("click", () => {
+  markedDates = {};
   localStorage.clear();
 });
 //
 
-let currentClr = "clrGray";
+let currentClr = null;
 
 const clrOptions = document.querySelectorAll(".clrOption");
 const btnPrev = document.querySelector(".btn-prev");
@@ -52,24 +54,43 @@ btnNext.addEventListener("click", (e) => {
 });
 
 document.addEventListener("click", (e) => {
-  if (e.target.classList.contains("daynum")) {
-    e.target.classList.toggle(currentClr);
+  const d = e.target;
 
-    e.target.classList.forEach((item) => {
-      if (item !== "daynum" && item !== currentClr) {
-        e.target.classList.remove(item);
-      }
-    });
+  if (d.classList.contains("daynum")) {
+    if (currentClr && d.classList.length <= 2) {
+      d.classList.toggle(currentClr);
+      d.style.background = `linear-gradient(-45deg, ${
+        colors[d.classList[1]]
+      } 49%, ${colors[d.classList[2]]} 51%)`;
+    } else if (!currentClr) {
+      d.classList.value = "daynum";
+      d.style.background = "";
+    }
+
     saveDate();
   }
 
-  if (e.target.classList.contains("clrOption")) {
-    currentClr = e.target.dataset.clr;
+  if (d.classList.contains("clrOption")) {
     clrOptions.forEach((item) => item.classList.remove("clrOption--current"));
-    e.target.classList.add("clrOption--current");
+    if (currentClr === d.dataset.clr) {
+      currentClr = null;
+    } else {
+      currentClr = d.dataset.clr;
+      d.classList.add("clrOption--current");
+    }
   }
 });
 
+// Colors
+const colors = {
+  clrGray: "#6b7280",
+  clrRed: "#ef4444",
+  clrYellow: "#f59e0b",
+  clrGreen: "#10b981",
+  clrBlue: "#3b82f6",
+  clrPurple: "#7c3aed",
+  clrPink: "#ec4899",
+};
 //
 // Date management
 const date = new Date();
@@ -162,11 +183,20 @@ const outputCal = () => {
 
   for (let i = 1; i <= lastDay; i++) {
     const pCurrent = document.createElement("P");
-    pCurrent.classList.add("daynum");
+
     pCurrent.dataset.date = `${date.getFullYear()}-${date.getMonth()}-${i}`;
 
     if (markedDates[pCurrent.dataset.date]) {
-      pCurrent.classList.add(markedDates[pCurrent.dataset.date]);
+      pCurrent.classList.value =
+        "daynum" + " " + markedDates[pCurrent.dataset.date];
+    } else {
+      pCurrent.classList.add("daynum");
+    }
+
+    if (pCurrent.classList.length === 3) {
+      pCurrent.style.background = `linear-gradient(-45deg, ${
+        colors[pCurrent.classList[1]]
+      } 49%, ${colors[pCurrent.classList[2]]} 51%)`;
     }
 
     pCurrent.innerHTML = i;
@@ -181,10 +211,12 @@ const outputCal = () => {
   }
 
   for (let j = 1; j <= nextDays; j++) {
-    const pNext = document.createElement("P");
-    pNext.classList.add("futuredaynum");
-    pNext.innerHTML = j;
-    days.push(pNext);
+    if (nextDays !== 7) {
+      const pNext = document.createElement("P");
+      pNext.classList.add("futuredaynum");
+      pNext.innerHTML = j;
+      days.push(pNext);
+    }
   }
 
   monthDays.innerHTML = "";

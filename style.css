@@ -15,6 +15,7 @@
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 body {
@@ -89,7 +90,8 @@ body {
 }
 
 .cal-body-daynums {
-  grid-template-rows: repeat(6, auto);
+  grid-template-rows: repeat(6, max-content);
+  min-height: 300px;
 }
 
 .cal-body-daynames *,
@@ -102,7 +104,7 @@ body {
   padding: 0.6em 0;
   min-width: 40px;
   user-select: none;
-  border: 1px solid #ffffff33;
+  border: 1px solid #333;
 }
 
 .dayname {
@@ -133,7 +135,7 @@ body {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin: 20px auto;
+  margin: 10px auto;
   padding: 10px;
   max-width: 420px;
 }
@@ -152,6 +154,7 @@ body {
   transform: scale(1.2);
 }
 
+/* Colors */
 .clrGray {
   background-color: #6b7280;
 }
@@ -167,18 +170,41 @@ body {
 .clrBlue {
   background-color: #3b82f6;
 }
-.clrIndigo {
+.clrPurple {
   background-color: #7c3aed;
 }
 .clrPink {
   background-color: #ec4899;
 }
 
+/* Lighter colors */
+/* .clrGray {
+  background-color: #9ca3af;
+}
+.clrRed {
+  background-color: #f87171;
+}
+.clrYellow {
+  background-color: #fbbf24;
+}
+.clrGreen {
+  background-color: #34d399;
+}
+.clrBlue {
+  background-color: #60a5fa;
+}
+.clrPurple {
+  background-color: #8b5cf6;
+}
+.clrPink {
+  background-color: #f472b6;
+} */
+
 /*  */
 #reset {
   all: unset;
   display: block;
-  margin: 10px auto;
+  margin: 20px auto 0;
   padding: 0.5em 1em;
   font-size: 1.25rem;
   color: #fff3;
