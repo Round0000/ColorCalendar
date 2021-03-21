@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "Fira Sans";
+  font-display: swap;
+  src: url("./fonts/FiraSans-Light.ttf"), url("./fonts/FiraSans-Regular.ttf");
+}
+
 *,
 *::before,
 *::after {
@@ -27,6 +33,7 @@ body {
   padding: 6px;
   justify-content: space-between;
   align-items: center;
+  font-weight: bolder;
 }
 
 .btn {
@@ -62,7 +69,6 @@ body {
 
 .cal-header-month {
   font-size: 1.5rem;
-  font-weight: 500;
   text-transform: uppercase;
 }
 
@@ -95,7 +101,7 @@ body {
 
 .dayname {
   background-color: #333;
-  font-weight: 300;
+  font-size: 1rem;
 }
 
 .daynum {
