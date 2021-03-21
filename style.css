@@ -1,7 +1,11 @@
+/* fira-sans-300 - latin */
 @font-face {
   font-family: "Fira Sans";
   font-display: swap;
-  src: url("./fonts/FiraSans-Light.ttf"), url("./fonts/FiraSans-Regular.ttf");
+  src: local(""), url("./fonts/fira-sans-v10-latin-300.woff2") format("woff2"),
+    url("./fonts/fira-sans-v10-latin-300.woff") format("woff"),
+    url("./fonts/fira-sans-v10-latin-regular.woff2") format("woff2"),
+    url("./fonts/fira-sans-v10-latin-regular.woff") format("woff");
 }
 
 *,
@@ -45,6 +49,8 @@ body {
 .btn img {
   pointer-events: none;
   display: block;
+  width: auto;
+  height: auto;
 }
 
 .anim-prev * {
