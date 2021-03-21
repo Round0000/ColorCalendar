@@ -1,5 +1,5 @@
 // PWA Service Worker
-const ASSETS = [
+const assets = [
   "/fonts/fira-sans-v10-latin-300.woff2",
   "/fonts/fira-sans-v10-latin-300.wof",
   "/fonts/fira-sans-v10-latin-regular.woff2",
