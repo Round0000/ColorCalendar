@@ -18,6 +18,7 @@
   "theme_color": "#1f2937",
   "background_color": "#ffffff",
   "display": "standalone",
+  "orientation": "portrait",
   "prefer_related_applications": false,
   "description": "A color based personal schedule"
 }
