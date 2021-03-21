@@ -99,7 +99,7 @@ body {
   align-items: center;
   background-color: #222;
   color: #fff;
-  padding: 16px 0;
+  padding: 0.6em 0;
   min-width: 40px;
   user-select: none;
   border: 1px solid #ffffff33;
@@ -114,6 +114,7 @@ body {
   cursor: pointer;
   text-shadow: 0px 1px 3px #000;
   transition: all 0.2s;
+  font-weight: bold;
 }
 
 .pastdaynum,
@@ -139,7 +140,7 @@ body {
 
 .clrOption {
   height: 40px;
-  width: 40px;
+  min-width: 40px;
   border-radius: 100%;
   border: 2px solid #fff6;
   cursor: pointer;
@@ -175,8 +176,22 @@ body {
 
 /*  */
 #reset {
+  all: unset;
   display: block;
-  margin: auto;
+  margin: 10px auto;
   padding: 0.5em 1em;
   font-size: 1.25rem;
+  color: #fff3;
+  background-color: transparent;
+  border: none;
+}
+
+/* Media queries */
+@media (min-width: 640px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+  }
 }
