@@ -17,7 +17,7 @@
   "scope": "/",
   "theme_color": "#1f2937",
   "background_color": "#ffffff",
-  "display": "fullscreen",
+  "display": "standalone",
   "prefer_related_applications": false,
   "description": "A color based personal schedule"
 }

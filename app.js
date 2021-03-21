@@ -1,11 +1,11 @@
 // PWA Service Worker
 const ASSETS = [
-  "./fonts/fira-sans-v10-latin-300.woff2",
-  "./fonts/fira-sans-v10-latin-300.wof",
-  "./fonts/fira-sans-v10-latin-regular.woff2",
-  "./fonts/fira-sans-v10-latin-regular.woff",
-  "./img/arrow-left.svg",
-  "./img/arrow-right.svg",
+  "/fonts/fira-sans-v10-latin-300.woff2",
+  "/fonts/fira-sans-v10-latin-300.wof",
+  "/fonts/fira-sans-v10-latin-regular.woff2",
+  "/fonts/fira-sans-v10-latin-regular.woff",
+  "/img/arrow-left.svg",
+  "/img/arrow-right.svg",
   "/style.css",
   "/index.html",
   "/",
