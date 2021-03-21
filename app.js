@@ -82,36 +82,68 @@ const outputCal = () => {
     date.getMonth(),
     0
   ).getDate();
-  const firstDayIndex = date.getDay();
+  // Modify next line to set week's first day //
+  const firstDayIndex = date.getDay() - 1;
+
   const lastDayIndex = new Date(
     date.getFullYear(),
     date.getMonth() + 1,
     0
   ).getDay();
-  const nextDays = 7 - lastDayIndex - 1;
+
+  let nextDays;
+  if (date.getDay() === 0) {
+    nextDays = 7 - lastDayIndex - 1;
+  } else {
+    nextDays = 7 - lastDayIndex;
+  }
+
+  // Months in english
+  // const months = [
+  //   "January",
+  //   "February",
+  //   "March",
+  //   "April",
+  //   "May",
+  //   "June",
+  //   "July",
+  //   "August",
+  //   "September",
+  //   "October",
+  //   "November",
+  //   "December",
+  // ];
 
   const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "Janvier",
+    "Février",
+    "Mars",
+    "Avril",
+    "Mai",
+    "Juin",
+    "Juillet",
+    "Août",
+    "Septembre",
+    "Octobre",
+    "Novembre",
+    "Décembre",
+  ];
+
+  const daynames = [
+    "Dimanche",
+    "Lundi",
+    "Mardi",
+    "Mercredi",
+    "Jeudi",
+    "Vendredi",
+    "Samedi",
   ];
 
   const month = date.getMonth();
 
   document.querySelector(".cal-header-month").innerHTML =
     months[date.getMonth()];
-  document.querySelector(
-    ".cal-header-day"
-  ).innerHTML = new Date().toDateString();
+  document.querySelector(".cal-header-year").innerHTML = date.getFullYear();
 
   let days = [];
 
@@ -151,7 +183,6 @@ const outputCal = () => {
 
   monthDays.innerHTML = "";
   days.forEach((day) => monthDays.append(day));
-  console.log(markedDates);
 };
 
 // Initial Calendar Output

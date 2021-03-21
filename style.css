@@ -22,10 +22,11 @@ body {
 
 .cal-header {
   display: flex;
-  background: linear-gradient(50deg, #dbeafe, #d5dff5);
+  background: linear-gradient(50deg, #d2e5fd, #d4def5);
   color: #1f2937;
   padding: 6px;
   justify-content: space-between;
+  align-items: center;
 }
 
 .btn {
@@ -36,6 +37,7 @@ body {
 
 .btn img {
   pointer-events: none;
+  display: block;
 }
 
 .anim-prev * {
@@ -58,17 +60,15 @@ body {
   }
 }
 
-.cal-header-date {
-  text-align: center;
-}
-
-.cal-header-date * {
-  margin: 10px;
-}
-
 .cal-header-month {
   font-size: 1.5rem;
+  font-weight: 500;
   text-transform: uppercase;
+}
+
+.cal-header-year {
+  font-size: 1rem;
+  text-align: center;
 }
 
 .cal-body * {
