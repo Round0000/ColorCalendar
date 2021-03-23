@@ -11,7 +11,11 @@ const saveDate = () => {
   document.querySelectorAll(".daynum").forEach((item) => {
     if (item.classList.length > 1) {
       markedDates[item.dataset.date] =
-        [item.classList[1]] + " " + [item.classList[2]];
+        [item.classList[1]] +
+        " " +
+        [item.classList[2]] +
+        " " +
+        [item.classList[3]];
     } else if (markedDates[item.dataset.date]) {
       delete markedDates[item.dataset.date];
     }
@@ -91,6 +95,7 @@ const colors = {
   clrPurple: "#7c3aed",
   clrPink: "#ec4899",
 };
+
 //
 // Date management
 const date = new Date();
@@ -197,6 +202,12 @@ const outputCal = () => {
       pCurrent.style.background = `linear-gradient(-45deg, ${
         colors[pCurrent.classList[1]]
       } 49%, ${colors[pCurrent.classList[2]]} 51%)`;
+    } else if (pCurrent.classList.length === 4) {
+      pCurrent.style.background = `linear-gradient(-45deg, ${
+        colors[pCurrent.classList[1]]
+      } 32%, ${colors[pCurrent.classList[2]]} 34% 65%, ${
+        colors[pCurrent.classList[3]]
+      } 67%)`;
     }
 
     pCurrent.innerHTML = i;
@@ -231,3 +242,40 @@ if (localStorage.getItem("markedDates")) {
 }
 
 outputCal();
+
+// Tim
+const fileSelector = document.getElementById("file-selector");
+fileSelector.addEventListener("change", (event) => {
+  const fileList = event.target.files;
+  readFile(fileList[0]);
+});
+
+function readFile(file) {
+  const reader = new FileReader();
+  reader.readAsText(file);
+
+  reader.onload = function () {
+    JSON.parse(reader.result).forEach((item) => {
+      const date = new Date(item);
+      let dateToMark =
+        markedDates[
+          `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+        ];
+
+      if (!dateToMark) {
+        markedDates[
+          `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+        ] = "clrRed";
+      } else
+        markedDates[
+          `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+        ] = "clrRed" + " " + dateToMark;
+    });
+    localStorage.setItem("markedDates", JSON.stringify(markedDates));
+    outputCal();
+  };
+
+  reader.onerror = function () {
+    console.log(reader.error);
+  };
+}
