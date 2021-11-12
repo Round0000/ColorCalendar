@@ -279,3 +279,14 @@ function readFile(file) {
     console.log(reader.error);
   };
 }
+
+// Text actions
+
+const btnAddText = document.querySelector('button.addText');
+const newTextForm = document.querySelector('form.newTextForm');
+
+btnAddText.addEventListener('click', e => {
+  btnAddText.classList.toggle('active');
+  newTextForm.classList.toggle('text-form-visible');
+  
+})
