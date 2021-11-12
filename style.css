@@ -227,3 +227,23 @@ body {
     padding: 1em 0;
   }
 }
+
+
+.actionsmenu {
+  display: flex;
+  justify-content: center;
+}
+
+.actionsmenu button {
+  all: unset;
+  width: 40px;
+  height: 40px;
+  border: 2px solid white;
+  color: #fff;
+  background: #2228;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: .5em;
+}
