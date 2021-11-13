@@ -295,6 +295,13 @@ const timeoScraper = () => {
   });
 };
 
+const inputFromTim = document.getElementById('inputFromTim');
+
+inputFromTim.addEventListener('submit', e => {
+  e.preventDefault();
+
+  console.log(e.target.dataFromTim.value);
+})
 
 
 // Text actions
