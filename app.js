@@ -244,22 +244,19 @@ if (localStorage.getItem("markedDates")) {
 outputCal();
 
 // Tim
-const updateMarkedDatesWithThisDay(day) ={
+const thisIsANewDay = (day) => {
   const date = new Date(item);
-      let dateToMark =
-        markedDates[
-          `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
-        ];
+  let dateToMark =
+    markedDates[`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`];
 
-      if (!dateToMark) {
-        markedDates[
-          `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
-        ] = "clrRed";
-      } else
-        markedDates[
-          `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
-        ] = "clrRed" + " " + dateToMark;
-}
+  if (!dateToMark) {
+    markedDates[`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`] =
+      "clrRed";
+  } else {
+    markedDates[`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`] =
+      "clrRed" + " " + dateToMark;
+  }
+};
 
 const fileSelector = document.getElementById("file-selector");
 fileSelector.addEventListener("change", (event) => {
@@ -273,7 +270,7 @@ function readFile(file) {
 
   reader.onload = function () {
     JSON.parse(reader.result).forEach((item) => {
-      updateMarkedDatesWithThisDay(item);
+      thisIsANewDay(item);
     });
     localStorage.setItem("markedDates", JSON.stringify(markedDates));
     outputCal();
@@ -283,8 +280,6 @@ function readFile(file) {
     console.log(reader.error);
   };
 }
-
-<<<<<<< HEAD
 
 const timeoScraper = () => {
   let todayFound = false;
@@ -298,10 +293,10 @@ const timeoScraper = () => {
       console.log(new Date(day.id));
     }
   });
-}
+};
 
 
-=======
+
 // Text actions
 
 const btnAddText = document.querySelector('button.addText');
@@ -312,4 +307,3 @@ btnAddText.addEventListener('click', e => {
   newTextForm.classList.toggle('text-form-visible');
   
 })
->>>>>>> 98af1e92b7476714e3e023f75df78bf448d0d112
