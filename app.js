@@ -244,19 +244,8 @@ if (localStorage.getItem("markedDates")) {
 outputCal();
 
 // Tim
-const fileSelector = document.getElementById("file-selector");
-fileSelector.addEventListener("change", (event) => {
-  const fileList = event.target.files;
-  readFile(fileList[0]);
-});
-
-function readFile(file) {
-  const reader = new FileReader();
-  reader.readAsText(file);
-
-  reader.onload = function () {
-    JSON.parse(reader.result).forEach((item) => {
-      const date = new Date(item);
+const updateMarkedDatesWithThisDay(day) ={
+  const date = new Date(item);
       let dateToMark =
         markedDates[
           `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
@@ -270,6 +259,21 @@ function readFile(file) {
         markedDates[
           `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
         ] = "clrRed" + " " + dateToMark;
+}
+
+const fileSelector = document.getElementById("file-selector");
+fileSelector.addEventListener("change", (event) => {
+  const fileList = event.target.files;
+  readFile(fileList[0]);
+});
+
+function readFile(file) {
+  const reader = new FileReader();
+  reader.readAsText(file);
+
+  reader.onload = function () {
+    JSON.parse(reader.result).forEach((item) => {
+      updateMarkedDatesWithThisDay(item);
     });
     localStorage.setItem("markedDates", JSON.stringify(markedDates));
     outputCal();
@@ -279,3 +283,20 @@ function readFile(file) {
     console.log(reader.error);
   };
 }
+
+
+const timeoScraper = () => {
+  let todayFound = false;
+  document.querySelectorAll(".mat-card").forEach((day) => {
+    if (day.querySelector(".is-today")) {
+      todayFound = true;
+    }
+
+    if (day.style.backgroundColor === "white" && todayFound) {
+      console.log(day.id);
+      console.log(new Date(day.id));
+    }
+  });
+}
+
+
