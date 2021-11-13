@@ -208,7 +208,6 @@ body {
 }
 
 .admin * {
-  all: unset;
   padding: 0.5em 1em;
   font-size: 1rem;
   color: #fff3;
@@ -298,4 +297,17 @@ body {
   height: 60px;
   opacity: 1;
   visibility: visible;  
+}
+
+#inputFromTim {
+  margin: 1em auto 4em;
+}
+
+#inputFromTim input[type='text'] {
+  color: #222;
+  background-color: snow;
+}
+#inputFromTim input[type='submit'] {
+  color: #222;
+  background-color: snow;
 }
