@@ -283,16 +283,17 @@ function readFile(file) {
 
 const timeoScraper = () => {
   let todayFound = false;
+  let arrayOfWorkdays = [];
   document.querySelectorAll(".mat-card").forEach((day) => {
     if (day.querySelector(".is-today")) {
       todayFound = true;
     }
 
     if (day.style.backgroundColor === "white" && todayFound) {
-      console.log(day.id);
-      console.log(new Date(day.id));
+      arrayOfWorkdays.push(day.id);
     }
   });
+  return arrayOfWorkdays;
 };
 
 const inputFromTim = document.getElementById('inputFromTim');
@@ -300,7 +301,9 @@ const inputFromTim = document.getElementById('inputFromTim');
 inputFromTim.addEventListener('submit', e => {
   e.preventDefault();
 
-  console.log(e.target.dataFromTim.value);
+  const importedData = JSON.parse(e.target.dataFromTim.value);
+
+  console.log(importedData);
 })
 
 
