@@ -72,15 +72,28 @@
       </div>
 
       <div class="admin">
-        <button id="reset">Reset</button>        
-        <input type="file" id="file-selector" />
+        <!-- <input type="file" id="file-selector" /> -->
         <form id="inputFromTim">
           <label for="dataFromTim">Importer planning de Timeo</label>
           <div>
             <input type="text" name="dataFromTim" id="dataFromTim">
-          <input type="submit" value="OK">
+            <input type="submit" value="OK">
           </div>
+          <code>
+            const timeoScraper = () => {
+              let arrayOfWorkdays = [];
+              document.querySelectorAll(".mat-card").forEach((day) => {
+                if (day.style.backgroundColor === "white") {
+                  arrayOfWorkdays.push(day.id);
+                }
+              });
+            
+              console.log("Export disponible : ");
+              return arrayOfWorkdays;
+            };
+          </code>
         </form>
+        <button id="reset">Reset</button>        
       </div>
     </div>
     <!--  -->

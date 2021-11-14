@@ -238,6 +238,7 @@ body {
   justify-content: center;
   z-index: 2;
   background-color: #000;
+  display: none;
 }
 
 .actionsmenu button {
@@ -304,6 +305,13 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #111;
+  outline: 2px solid #333;
+  outline-offset: 2px;
+}
+
+#inputFromTim label {
+  color: #fff;
 }
 
 #inputFromTim input[type='text'] {
@@ -317,4 +325,9 @@ body {
   background-color: snow;
   cursor: pointer;
   margin-left: 1em;
+}
+
+#inputFromTim code {
+  font-size: .75rem;
+  text-align: left;
 }

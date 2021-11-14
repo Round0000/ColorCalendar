@@ -244,7 +244,7 @@ if (localStorage.getItem("markedDates")) {
 outputCal();
 
 // Tim
-const thisIsANewDay = (day) => {
+const thisIsANewDay = (item) => {
   const date = new Date(item);
   let dateToMark =
     markedDates[`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`];
@@ -252,17 +252,18 @@ const thisIsANewDay = (day) => {
   if (!dateToMark) {
     markedDates[`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`] =
       "clrRed";
-  } else {
+  } else if (!dateToMark.includes("clrRed")) {
     markedDates[`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`] =
       "clrRed" + " " + dateToMark;
+    console.log("weshweshsshssh");
   }
 };
 
-const fileSelector = document.getElementById("file-selector");
-fileSelector.addEventListener("change", (event) => {
-  const fileList = event.target.files;
-  readFile(fileList[0]);
-});
+// const fileSelector = document.getElementById("file-selector");
+// fileSelector.addEventListener("change", (event) => {
+//   const fileList = event.target.files;
+//   readFile(fileList[0]);
+// });
 
 function readFile(file) {
   const reader = new FileReader();
@@ -281,39 +282,53 @@ function readFile(file) {
   };
 }
 
-const timeoScraper = () => {
-  let todayFound = false;
-  let arrayOfWorkdays = [];
-  document.querySelectorAll(".mat-card").forEach((day) => {
-    if (day.querySelector(".is-today")) {
-      todayFound = true;
-    }
 
-    if (day.style.backgroundColor === "white" && todayFound) {
-      arrayOfWorkdays.push(day.id);
-    }
-  });
-  return arrayOfWorkdays;
-};
 
-const inputFromTim = document.getElementById('inputFromTim');
+const inputFromTim = document.getElementById("inputFromTim");
 
-inputFromTim.addEventListener('submit', e => {
+inputFromTim.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const importedData = JSON.parse(e.target.dataFromTim.value);
+  let userStr = e.target.dataFromTim.value;
 
-  console.log(importedData);
-})
+  if (userStr[0] === "[" && userStr.charAt(userStr.length - 1) === "]") {
+    const importedData = JSON.parse(userStr);
 
+    e.target.reset();
+
+    importedData.forEach((date) => {
+      thisIsANewDay(date);
+    });
+
+    localStorage.setItem("markedDates", JSON.stringify(markedDates));
+    outputCal();
+
+    console.log("Données correctement importées !");
+  } else {
+    console.log("Ces données ne sont pas valides...");
+  }
+});
 
 // Text actions
 
-const btnAddText = document.querySelector('button.addText');
-const newTextForm = document.querySelector('form.newTextForm');
+const btnAddText = document.querySelector("button.addText");
+const newTextForm = document.querySelector("form.newTextForm");
 
-btnAddText.addEventListener('click', e => {
-  btnAddText.classList.toggle('active');
-  newTextForm.classList.toggle('text-form-visible');
-  
-})
+btnAddText.addEventListener("click", (e) => {
+  btnAddText.classList.toggle("active");
+  newTextForm.classList.toggle("text-form-visible");
+});
+
+
+// Timeo Scraper Module
+const timeoScraper = () => {
+  let arrayOfWorkdays = [];
+  document.querySelectorAll(".mat-card").forEach((day) => {
+    if (day.style.backgroundColor === "white") {
+      arrayOfWorkdays.push(day.id);
+    }
+  });
+
+  console.log("Les dates ci-dessous sont prêtes à être copiées : ");
+  return arrayOfWorkdays;
+};
