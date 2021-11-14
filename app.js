@@ -64,15 +64,18 @@ document.addEventListener("click", (e) => {
 
   if (d.classList.contains("daynum")) {
 
-    if (addingNewText) {
+    if (addingNewText && newTextForm.newtext.value.length > 0) {
+      console.log(newTextForm.newtext.value);
       d.dataset.comment = newTextForm.newtext.value;
       commentedDates[d.dataset.date] = d.dataset.comment;
       localStorage.setItem("commentedDates", JSON.stringify(commentedDates));
       addingNewText = false;
+      btnAddText.classList.remove("active");
+      movingRow.classList.remove("textInputMode");
       return;
     }
 
-    if (currentClr && d.classList.length <= 2) {
+    if (currentClr && d.classList.length <= 2 && !document.querySelector('.textInputMode')) {
       d.classList.toggle(currentClr);
       d.style.background = `linear-gradient(-45deg, ${colors[d.classList[1]]
         } 49%, ${colors[d.classList[2]]} 51%)`;
@@ -343,8 +346,12 @@ let addingNewText = false;
 newTextForm.addEventListener('submit', e => {
   e.preventDefault();
 
-  addingNewText = true;
-  console.log(e.target.newtext.value);
+  if (newTextForm.newtext.value.length > 0) {
+    addingNewText = true;
+    console.log(e.target.newtext.value);
+  };
+
+
 })
 
 
