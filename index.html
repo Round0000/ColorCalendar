@@ -61,41 +61,69 @@
           <div data-clr="clrPink" class="clrOption clrPink"></div>
         </div>
         <form class="newTextForm">
-          <input type="text" id="newtext" name="newtext" minlength="1" maxlength="120" placeholder="Inscrire le commentaire ici">
-          <input type="submit" value="OK">
+          <input
+            type="text"
+            id="newtext"
+            name="newtext"
+            minlength="1"
+            maxlength="120"
+            placeholder="Inscrire le commentaire ici"
+          />
+          <input type="submit" value="OK" />
         </form>
         <div class="actionsmenu">
           <button class="addText">Aa</button>
-          <button class="viewDetails">Oo</button>
+          <button class="viewDetails">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              fill="#fff"
+              viewBox="0 0 256 256"
+            >
+              <rect width="256" height="256" fill="none"></rect>
+              <g opacity="0.1"></g>
+              <circle
+                cx="128"
+                cy="128"
+                r="96"
+                fill="none"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="8"
+              ></circle>
+              <polyline
+                points="120 120 128 120 128 176 136 176"
+                fill="none"
+                stroke="#fff"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="16"
+              ></polyline>
+              <circle cx="126" cy="84" r="12"></circle>
+            </svg>
+          </button>
         </div>
-        
       </div>
-
-      
 
       <div class="admin">
         <!-- <input type="file" id="file-selector" /> -->
         <form id="inputFromTim">
           <label for="dataFromTim">Importer planning de Timeo</label>
           <div>
-            <input type="text" name="dataFromTim" id="dataFromTim">
-            <input type="submit" value="OK">
+            <input type="text" name="dataFromTim" id="dataFromTim" />
+            <input type="submit" value="OK" />
           </div>
           <code>
-            const timeoScraper = () => {
-              let arrayOfWorkdays = [];
-              document.querySelectorAll(".mat-card").forEach((day) => {
-                if (day.style.backgroundColor === "white") {
-                  arrayOfWorkdays.push(day.id);
-                }
-              });
-            
-              console.log("Export disponible : ");
-              return arrayOfWorkdays;
-            };
+            const timeoScraper = () => { let arrayOfWorkdays = [];
+            document.querySelectorAll(".mat-card").forEach((day) => { if
+            (day.style.backgroundColor === "white") {
+            arrayOfWorkdays.push(day.id); } }); console.log("Export disponible :
+            "); return arrayOfWorkdays; };
           </code>
         </form>
-        <button id="reset">Reset</button>        
+        <button id="reset">Reset</button>
       </div>
     </div>
     <!--  -->

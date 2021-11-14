@@ -59,11 +59,34 @@ btnNext.addEventListener("click", (e) => {
   }, 300);
 });
 
+window.addEventListener('keydown', (event) => {
+  if (event.code === 'ArrowLeft') {
+    date.setMonth(date.getMonth() - 1);
+  outputCal();
+
+  btnPrev.classList.add("anim-prev");
+  setTimeout(() => {
+    btnPrev.classList.remove("anim-prev");
+  }, 300);
+  }
+});
+
+window.addEventListener('keydown', (event) => {
+  if (event.code === 'ArrowRight') {
+    date.setMonth(date.getMonth() + 1);
+  outputCal();
+
+  btnNext.classList.add("anim-next");
+  setTimeout(() => {
+    btnNext.classList.remove("anim-next");
+  }, 300);
+  }
+});
+
 document.addEventListener("click", (e) => {
   const d = e.target;
 
   if (d.classList.contains("daynum")) {
-
     if (addingNewText && newTextForm.newtext.value.length > 0) {
       console.log(newTextForm.newtext.value);
       d.dataset.comment = newTextForm.newtext.value;
@@ -72,14 +95,20 @@ document.addEventListener("click", (e) => {
       addingNewText = false;
       btnAddText.classList.remove("active");
       movingRow.classList.remove("textInputMode");
+      newTextForm.reset();
       return;
     }
 
-    if (currentClr && d.classList.length <= 2 && !document.querySelector('.textInputMode')) {
+    if (
+      currentClr &&
+      d.classList.length <= 2 &&
+      !document.querySelector(".textInputMode")
+    ) {
       d.classList.toggle(currentClr);
-      d.style.background = `linear-gradient(-45deg, ${colors[d.classList[1]]
-        } 49%, ${colors[d.classList[2]]} 51%)`;
-    } else if (!currentClr && !document.querySelector('.textInputMode')) {
+      d.style.background = `linear-gradient(-45deg, ${
+        colors[d.classList[1]]
+      } 49%, ${colors[d.classList[2]]} 51%)`;
+    } else if (!currentClr && !document.querySelector(".textInputMode")) {
       d.classList.value = "daynum";
       d.style.background = "";
     }
@@ -218,12 +247,15 @@ const outputCal = () => {
     }
 
     if (pCurrent.classList.length === 3) {
-      pCurrent.style.background = `linear-gradient(-45deg, ${colors[pCurrent.classList[1]]
-        } 49%, ${colors[pCurrent.classList[2]]} 51%)`;
+      pCurrent.style.background = `linear-gradient(-45deg, ${
+        colors[pCurrent.classList[1]]
+      } 49%, ${colors[pCurrent.classList[2]]} 51%)`;
     } else if (pCurrent.classList.length === 4) {
-      pCurrent.style.background = `linear-gradient(-45deg, ${colors[pCurrent.classList[1]]
-        } 32%, ${colors[pCurrent.classList[2]]} 34% 65%, ${colors[pCurrent.classList[3]]
-        } 67%)`;
+      pCurrent.style.background = `linear-gradient(-45deg, ${
+        colors[pCurrent.classList[1]]
+      } 32%, ${colors[pCurrent.classList[2]]} 34% 65%, ${
+        colors[pCurrent.classList[3]]
+      } 67%)`;
     }
 
     pCurrent.innerHTML = i;
@@ -303,8 +335,6 @@ function readFile(file) {
   };
 }
 
-
-
 const inputFromTim = document.getElementById("inputFromTim");
 
 inputFromTim.addEventListener("submit", (e) => {
@@ -334,7 +364,7 @@ inputFromTim.addEventListener("submit", (e) => {
 
 const btnAddText = document.querySelector("button.addText");
 const movingRow = document.querySelector(".moving-row");
-const newTextForm = document.querySelector('.newTextForm');
+const newTextForm = document.querySelector(".newTextForm");
 
 btnAddText.addEventListener("click", (e) => {
   btnAddText.classList.toggle("active");
@@ -343,17 +373,14 @@ btnAddText.addEventListener("click", (e) => {
 
 let addingNewText = false;
 
-newTextForm.addEventListener('submit', e => {
+newTextForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
   if (newTextForm.newtext.value.length > 0) {
     addingNewText = true;
     console.log(e.target.newtext.value);
-  };
-
-
-})
-
+  }
+});
 
 // Timeo Scraper Module
 const timeoScraper = () => {

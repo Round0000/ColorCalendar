@@ -221,17 +221,6 @@ body {
   margin-bottom: 1em;
 }
 
-/* Media queries */
-@media (min-width: 640px) {
-  .container {
-    margin-top: 5vh;
-  }
-
-  .cal-body-daynames *,
-  .cal-body-daynums * {
-    padding: 1em 0;
-  }
-}
 
 /* Text Actions */
 
@@ -356,18 +345,56 @@ body {
 
 .daynum[data-comment]::before {
   position: absolute;
-  content: "i";
-  font-size: 16px;
-  padding: 9px;
-  font-weight: lighter;
-  top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  right: 0;
-  border: 1px solid #fff9;
-  background-color: #0005;
-  width: 1em;
-  height: 1em;
-  border-radius: 100%;
+  content: "";
+  top: 3px;
+  right: 3px;
+  background-color: #000a;
+  border: 2px solid #fffe;
+  width: 8px;
+  height: 8px;
+  transform: rotate(45deg);
+}
+
+/* .daynum[data-comment]::after {
+  position: fixed;
+  bottom: 40%;
+  left: 25%;
+  right: 25%;
+  content: attr(data-comment);
+  background-color: #fff;
+  padding: .5em .75em;
+  color: #222;
+  z-index: 10;
+  text-shadow: none;
+  font-size: .9rem;
+  min-height: 4em;
+  box-shadow: 0 2px 15px #fff5;
+  outline: 6px solid #fff3;
+  opacity: 0;
+  transition: all .3s;
+}
+
+.daynum[data-comment]:hover::after {
+  opacity: 1;
+} */
+
+
+
+/* Media queries */
+@media (min-width: 640px) {
+  .container {
+    margin-top: 5vh;
+  }
+
+  .cal-body-daynames *,
+  .cal-body-daynums * {
+    padding: 1em 0;
+  }
+
+  .daynum[data-comment]::before {
+    width: 12px;
+    height: 12px;
+    top: 6px;
+    right: 6px;
+  }
 }
