@@ -113,6 +113,7 @@ body {
 }
 
 .daynum {
+  position: relative;
   cursor: pointer;
   text-shadow: 0px 1px 3px #000;
   transition: all 0.2s;
@@ -215,6 +216,11 @@ body {
   border: none;
 }
 
+#reset {
+  color: crimson;
+  margin-bottom: 1em;
+}
+
 /* Media queries */
 @media (min-width: 640px) {
   .container {
@@ -259,7 +265,7 @@ body {
 }
 
 .actionsmenu button.active {
-  background-color: #222;
+  background: linear-gradient(-90deg, #333, rgb(3, 37, 65));
   outline-color: white;
   color: orange;
 }
@@ -346,4 +352,22 @@ body {
   visibility: visible;
   transform: unset;
   opacity: 1;
+}
+
+.daynum[data-comment]::before {
+  position: absolute;
+  content: "i";
+  font-size: 16px;
+  padding: 9px;
+  font-weight: lighter;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 0;
+  border: 1px solid #fff9;
+  background-color: #0005;
+  width: 1em;
+  height: 1em;
+  border-radius: 100%;
 }

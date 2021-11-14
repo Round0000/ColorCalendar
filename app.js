@@ -6,6 +6,7 @@
 
 // Data storage
 let markedDates = {};
+let commentedDates = {};
 
 const saveDate = () => {
   document.querySelectorAll(".daynum").forEach((item) => {
@@ -27,6 +28,7 @@ const saveDate = () => {
 const reset = document.querySelector("#reset");
 reset.addEventListener("click", () => {
   markedDates = {};
+  commentedDates = {};
   localStorage.clear();
 });
 //
@@ -61,11 +63,19 @@ document.addEventListener("click", (e) => {
   const d = e.target;
 
   if (d.classList.contains("daynum")) {
+
+    if (addingNewText) {
+      d.dataset.comment = newTextForm.newtext.value;
+      commentedDates[d.dataset.date] = d.dataset.comment;
+      localStorage.setItem("commentedDates", JSON.stringify(commentedDates));
+      addingNewText = false;
+      return;
+    }
+
     if (currentClr && d.classList.length <= 2) {
       d.classList.toggle(currentClr);
-      d.style.background = `linear-gradient(-45deg, ${
-        colors[d.classList[1]]
-      } 49%, ${colors[d.classList[2]]} 51%)`;
+      d.style.background = `linear-gradient(-45deg, ${colors[d.classList[1]]
+        } 49%, ${colors[d.classList[2]]} 51%)`;
     } else if (!currentClr) {
       d.classList.value = "daynum";
       d.style.background = "";
@@ -191,6 +201,12 @@ const outputCal = () => {
 
     pCurrent.dataset.date = `${date.getFullYear()}-${date.getMonth()}-${i}`;
 
+    console.log(commentedDates[pCurrent.dataset.date]);
+
+    if (commentedDates[pCurrent.dataset.date]) {
+      pCurrent.dataset.comment = commentedDates[pCurrent.dataset.date];
+    }
+
     if (markedDates[pCurrent.dataset.date]) {
       pCurrent.classList.value =
         "daynum" + " " + markedDates[pCurrent.dataset.date];
@@ -199,15 +215,12 @@ const outputCal = () => {
     }
 
     if (pCurrent.classList.length === 3) {
-      pCurrent.style.background = `linear-gradient(-45deg, ${
-        colors[pCurrent.classList[1]]
-      } 49%, ${colors[pCurrent.classList[2]]} 51%)`;
+      pCurrent.style.background = `linear-gradient(-45deg, ${colors[pCurrent.classList[1]]
+        } 49%, ${colors[pCurrent.classList[2]]} 51%)`;
     } else if (pCurrent.classList.length === 4) {
-      pCurrent.style.background = `linear-gradient(-45deg, ${
-        colors[pCurrent.classList[1]]
-      } 32%, ${colors[pCurrent.classList[2]]} 34% 65%, ${
-        colors[pCurrent.classList[3]]
-      } 67%)`;
+      pCurrent.style.background = `linear-gradient(-45deg, ${colors[pCurrent.classList[1]]
+        } 32%, ${colors[pCurrent.classList[2]]} 34% 65%, ${colors[pCurrent.classList[3]]
+        } 67%)`;
     }
 
     pCurrent.innerHTML = i;
@@ -238,6 +251,11 @@ const outputCal = () => {
 if (localStorage.getItem("markedDates")) {
   markedDates = JSON.parse(
     localStorage.getItem("markedDates", JSON.stringify(markedDates))
+  );
+}
+if (localStorage.getItem("commentedDates")) {
+  commentedDates = JSON.parse(
+    localStorage.getItem("commentedDates", JSON.stringify(commentedDates))
   );
 }
 
@@ -313,11 +331,21 @@ inputFromTim.addEventListener("submit", (e) => {
 
 const btnAddText = document.querySelector("button.addText");
 const movingRow = document.querySelector(".moving-row");
+const newTextForm = document.querySelector('.newTextForm');
 
 btnAddText.addEventListener("click", (e) => {
   btnAddText.classList.toggle("active");
   movingRow.classList.toggle("textInputMode");
 });
+
+let addingNewText = false;
+
+newTextForm.addEventListener('submit', e => {
+  e.preventDefault();
+
+  addingNewText = true;
+  console.log(e.target.newtext.value);
+})
 
 
 // Timeo Scraper Module
