@@ -312,11 +312,11 @@ inputFromTim.addEventListener("submit", (e) => {
 // Text actions
 
 const btnAddText = document.querySelector("button.addText");
-const newTextForm = document.querySelector("form.newTextForm");
+const movingRow = document.querySelector(".moving-row");
 
 btnAddText.addEventListener("click", (e) => {
   btnAddText.classList.toggle("active");
-  newTextForm.classList.toggle("text-form-visible");
+  movingRow.classList.toggle("textInputMode");
 });
 
 

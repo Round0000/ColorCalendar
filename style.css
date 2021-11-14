@@ -230,6 +230,8 @@ body {
 /* Text Actions */
 
 .moving-row {
+  overflow: hidden;
+  display: grid;
 }
 
 .actionsmenu {
@@ -238,7 +240,6 @@ body {
   justify-content: center;
   z-index: 2;
   background-color: #000;
-  display: none;
 }
 
 .actionsmenu button {
@@ -264,13 +265,17 @@ body {
 }
 
 .newTextForm {
-  height: 0;
-  opacity: 0;
+  grid-row: 1;
+  grid-column: 1;
+  margin: 10px auto;
+  padding: 10px;
+  display: flex;
   transition: all .4s;
-  visibility: hidden; 
-  display: flex; 
   width: 100%;
+  opacity: 0;
+  visibility: hidden;
   justify-content: space-between;
+  transform: translateX(600px);
 }
 
 .newTextForm input {
@@ -292,12 +297,6 @@ body {
   border: 2px solid #dff;
   color: #fff;
   cursor: pointer;
-}
-
-.text-form-visible {
-  height: 60px;
-  opacity: 1;
-  visibility: visible;  
 }
 
 #inputFromTim {
@@ -330,4 +329,21 @@ body {
 #inputFromTim code {
   font-size: .75rem;
   text-align: left;
+  color: #fff9;
+}
+
+.clrmenu {
+  transition: transform .4s;
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.textInputMode .clrmenu {
+  transform: translateX(-600px);
+}
+
+.textInputMode .newTextForm {
+  visibility: visible;
+  transform: unset;
+  opacity: 1;
 }
