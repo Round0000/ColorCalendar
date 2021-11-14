@@ -79,7 +79,7 @@ document.addEventListener("click", (e) => {
       d.classList.toggle(currentClr);
       d.style.background = `linear-gradient(-45deg, ${colors[d.classList[1]]
         } 49%, ${colors[d.classList[2]]} 51%)`;
-    } else if (!currentClr) {
+    } else if (!currentClr && !document.querySelector('.textInputMode')) {
       d.classList.value = "daynum";
       d.style.background = "";
     }
