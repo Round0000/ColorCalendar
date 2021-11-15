@@ -382,11 +382,11 @@ body {
 }
 
 #inputFromTim details {
-  cursor: pointer;
   padding-top: 0;
 }
 
 #inputFromTim summary {
+  cursor: pointer;
   color: #eee;
   text-decoration: underline;
   text-underline-offset: 2px;
