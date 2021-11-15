@@ -239,41 +239,47 @@
 
       <div class="admin">
         <div class="importDataFromFile">
+          <label for="file-selector">Importer une sauvegarde</label>
           <input type="file" id="file-selector" />
         </div>
-        <form id="inputFromTim">
+
+        <button id="export">Exporter les données</button>
+        <button id="reset">Effacer les données</button>
+
+        <form id="inputFromTim" class="">
           <label for="dataFromTim">Importer planning de Timeo</label>
           <div>
             <input type="text" required name="dataFromTim" id="dataFromTim" />
             <input type="submit" value="OK" />
           </div>
-          <ul>
-            <li>• Manipulation uniquement disponible sur ordinateur</li>
-            <li>• Copier le code ci-dessous dans le presse-papier</li>
-            <li>
-              • En étant sur la page "Calendrier Annuel" de Timeo, ouvrir la
-              Console du navigateur (<em>F12</em> ou bien
-              <em>Ctrl + Maj + C</em>)
-            </li>
-            <li>
-              • Coller le code dans la Console et valider en appuyant sur
-              <em>Entrée</em>
-            </li>
-            <li>
-              • Copier la réponse de la Console (<em>Clic droit</em> puis "Copier l'objet") et la coller ici dans le champ
-              d'importation
-            </li>
-          </ul>
-          <code>
-            const timeoScraper = () => { let arrayOfWorkdays = [];
-            document.querySelectorAll(".mat-card").forEach((day) => { if
-            (day.style.backgroundColor === "white") {
-            arrayOfWorkdays.push(day.id); } }); console.log("Export disponible :
-            "); return arrayOfWorkdays; }; timeoScraper();
-          </code>
+          <details>
+            <summary>Voir les instructions</summary>
+            <ul>
+              <li>• Manipulation uniquement disponible sur ordinateur</li>
+              <li>• Copier le code ci-dessous dans le presse-papier</li>
+              <li>
+                • En étant sur la page "Calendrier Annuel" de Timeo, ouvrir la
+                Console du navigateur (<em>F12</em> ou bien
+                <em>Ctrl + Maj + C</em>)
+              </li>
+              <li>
+                • Coller le code dans la Console et valider en appuyant sur
+                <em>Entrée</em>
+              </li>
+              <li>
+                • Copier la réponse de la Console (<em>Clic droit</em> puis
+                "Copier l'objet") et la coller ici dans le champ d'importation
+              </li>
+            </ul>
+            <code>
+              const timeoScraper = () => { let arrayOfWorkdays = [];
+              document.querySelectorAll(".mat-card").forEach((day) => { if
+              (day.style.backgroundColor === "white") {
+              arrayOfWorkdays.push(day.id); } }); console.log("Export disponible :
+              "); return arrayOfWorkdays; }; timeoScraper();
+            </code>
+          </details>
         </form>
-        <button id="export">Exporter les données</button>
-        <button id="reset">Effacer les données</button>
       </div>
     </div>
     <!--  -->

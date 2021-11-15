@@ -420,6 +420,8 @@ inputFromTim.addEventListener("submit", (e) => {
   if (userStr[0] === "[" && userStr.charAt(userStr.length - 1) === "]") {
     const importedData = JSON.parse(userStr);
 
+    console.log(importedData);
+
     e.target.reset();
 
     importedData.forEach((date) => {

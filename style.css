@@ -26,7 +26,7 @@ body {
 
 /*  */
 .d-none {
-  display: none;
+  display: none !important;
 }
 
 .container {
@@ -319,7 +319,7 @@ body {
 /* Input from Tim */
 
 #inputFromTim {
-  margin: 1em auto 2em;
+  margin: 2em auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -378,6 +378,17 @@ body {
   color: #fff9;
   border: 1px solid orange;
   background-color: rgb(3, 5, 12);
+}
+
+#inputFromTim details {
+  cursor: pointer;
+  padding-top: 0;
+}
+#inputFromTim summary {
+  color: #eee;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: #fff9;
 }
 
 .clrmenu {
@@ -494,6 +505,10 @@ body {
   background-color: #111;
   outline: 2px solid #333;
   outline-offset: 2px;
+}
+
+.importDataFromFile label {
+  color: #eee;
 }
 
 
