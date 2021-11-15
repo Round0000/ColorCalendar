@@ -9,7 +9,8 @@ const clrOptions = document.querySelectorAll(".clrOption");
 const btnPrev = document.querySelector(".btn-prev");
 const btnNext = document.querySelector(".btn-next");
 const detailsDisplay = document.querySelector(".detailsDisplay");
-const btnViewDetails = document.querySelector("button.viewDetails");
+const btnViewDetails = document.querySelector(".viewDetails");
+const btnOpenSettings = document.querySelector('.openSettings');
 const btnAddText = document.querySelector("button.addText");
 const movingRow = document.querySelector(".moving-row");
 const newTextForm = document.querySelector(".newTextForm");
@@ -458,3 +459,7 @@ detailsSavequit.addEventListener("click", (e) => {
   localStorage.setItem("commentedDates", JSON.stringify(commentedDates));
   detailsDisplay.style.display = "none";
 });
+
+btnOpenSettings.addEventListener('click', e => {
+  document.querySelector('.admin').classList.toggle('d-none');
+})

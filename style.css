@@ -25,6 +25,10 @@ body {
 }
 
 /*  */
+.d-none {
+  display: none;
+}
+
 .container {
   width: 100%;
   max-width: 600px;
@@ -206,6 +210,7 @@ body {
 .admin {
   margin-top: 30px;
   text-align: center;
+  padding-bottom: 2em;
 }
 
 .admin * {
@@ -217,8 +222,10 @@ body {
 }
 
 #reset {
-  color: crimson;
+  color: orange;
   margin-bottom: 1em;
+  padding: .5em 1em;
+  background-color: #fff1;
 }
 
 
