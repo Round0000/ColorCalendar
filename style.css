@@ -369,6 +369,8 @@ body {
   font-size: .75rem;
   text-align: left;
   color: #fff9;
+  border: 1px solid orange;
+  background-color: rgb(3, 5, 12);
 }
 
 .clrmenu {
