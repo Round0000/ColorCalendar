@@ -221,20 +221,22 @@ body {
   border: none;
 }
 
+#reset,
+#export {
+  margin: 1em;
+  padding: 0.5em 1.25em;
+  background: linear-gradient(45deg, #ccc1, #222c);
+  border: 1px solid #fff9;
+  cursor: pointer;
+}
+
 #reset {
   color: orange;
-  margin: 1em;
-  padding: .5em 1em;
-  background-color: #fff1;
 }
 
 #export {
   color: #3b82f6;
-  margin: 1em;
-  padding: .5em 1em;
-  background-color: #fff1;
 }
-
 
 /* Text Actions */
 
@@ -263,8 +265,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: .5em;
-  transition: all .2s;
+  margin: 0.5em;
+  transition: all 0.2s;
   outline: 3px solid transparent;
   outline-offset: -1px;
 }
@@ -281,7 +283,7 @@ body {
   margin: 10px auto;
   padding: 10px;
   display: flex;
-  transition: all .4s;
+  transition: all 0.4s;
   width: 100%;
   opacity: 0;
   visibility: hidden;
@@ -291,7 +293,7 @@ body {
 
 .newTextForm input {
   height: 36px;
-  padding: .4em;
+  padding: 0.4em;
   font-family: inherit;
   font-size: 1rem;
 }
@@ -301,11 +303,9 @@ body {
   margin-right: 1em;
 }
 
-
-
 .newTextForm input[type="submit"] {
   appearance: none;
-  padding: .25em 1em;
+  padding: 0.25em 1em;
   background-color: #333;
   border: 2px solid #dff;
   color: #fff;
@@ -313,7 +313,7 @@ body {
 }
 
 .newTextForm input[type="text"]:invalid ~ input[type="submit"] {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 /* Input from Tim */
@@ -335,8 +335,8 @@ body {
 
 #inputFromTim li {
   color: #ddd;
-  font-size: .9rem;
-  padding: .25em .5em;
+  font-size: 0.9rem;
+  padding: 0.25em 0.5em;
 }
 
 #inputFromTim li em {
@@ -349,31 +349,32 @@ body {
   color: #fff;
 }
 
-#inputFromTim input[type='text'] {
+#inputFromTim input[type="text"] {
   color: #222;
   background-color: snow;
-  margin: .25em;
+  margin: 0.25em;
   height: 36px;
-  padding: .4em;
+  padding: 0.4em;
   font-family: inherit;
   font-size: 1rem;
 }
-#inputFromTim input[type='submit'] {
+#inputFromTim input[type="submit"] {
   appearance: none;
-  padding: .25em 1em;
+  padding: 0.25em 1em;
   background-color: #333;
   border: 2px solid #dff;
   color: #fff;
   cursor: pointer;
-  padding: .4em 1em;
+  padding: 0.4em 1em;
 }
 
 #inputFromTim input[type="text"]:invalid ~ input[type="submit"] {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 #inputFromTim code {
-  font-size: .75rem;
+  display: block;
+  font-size: 0.75rem;
   text-align: left;
   color: #fff9;
   border: 1px solid orange;
@@ -384,6 +385,7 @@ body {
   cursor: pointer;
   padding-top: 0;
 }
+
 #inputFromTim summary {
   color: #eee;
   text-decoration: underline;
@@ -392,7 +394,7 @@ body {
 }
 
 .clrmenu {
-  transition: transform .4s;
+  transition: transform 0.4s;
   grid-row: 1;
   grid-column: 1;
 }
@@ -424,7 +426,7 @@ body {
   background-color: #111;
   color: #111;
   font-size: 1rem;
-  padding: 0 .5em .5em;
+  padding: 0 0.5em 0.5em;
   top: 0;
   bottom: 0;
   left: 0;
@@ -445,16 +447,20 @@ body {
   color: #333;
   color: white;
   align-self: center;
-  padding: 0 .2em;
-  background: linear-gradient(to top, rgba(255, 166, 0, 0.185) 25%, transparent 0);
+  padding: 0 0.2em;
+  background: linear-gradient(
+    to top,
+    rgba(255, 166, 0, 0.185) 25%,
+    transparent 0
+  );
 }
 
 .detailsDisplay p {
   grid-column: 1 / -1;
   grid-row: 2 / 3;
   border: 1px solid #2225;
-  padding: .5em;
-  font-size: .9rem;
+  padding: 0.5em;
+  font-size: 0.9rem;
   box-shadow: inset 0 1px 4px #2222;
   background-color: ghostwhite;
   color: #222;
@@ -482,8 +488,8 @@ body {
 
 .detailsActions button span {
   color: #eee;
-  padding: .5em;
-  font-size: .9rem;
+  padding: 0.5em;
+  font-size: 0.9rem;
 }
 
 #removeDetails span {
@@ -510,7 +516,6 @@ body {
 .importDataFromFile label {
   color: #eee;
 }
-
 
 /* Media queries */
 @media (min-width: 640px) {
