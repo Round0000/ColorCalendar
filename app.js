@@ -39,9 +39,16 @@ const saveDate = () => {
 // Erase data from Local Storage
 const reset = document.querySelector("#reset");
 reset.addEventListener("click", () => {
-  markedDates = {};
-  commentedDates = {};
-  localStorage.clear();
+  if (
+    confirm(
+      "Êtes-vous sûr de vouloir effacer toutes les données du calendrier?"
+    )
+  ) {
+    markedDates = {};
+    commentedDates = {};
+    localStorage.clear();
+    outputCal();
+  }
 });
 //
 
@@ -136,6 +143,8 @@ document.addEventListener("click", (e) => {
 
   if (d.classList.contains("clrOption")) {
     clrOptions.forEach((item) => item.classList.remove("clrOption--current"));
+    btnViewDetails.classList.remove("active");
+    detailsViewMode = false;
     if (currentClr === d.dataset.clr) {
       currentClr = null;
     } else {
@@ -381,11 +390,11 @@ inputFromTim.addEventListener("submit", (e) => {
 // Text actions
 
 btnAddText.addEventListener("click", (e) => {
+  clrOptions.forEach((item) => item.classList.remove("clrOption--current"));
   btnViewDetails.classList.remove("active");
+  detailsViewMode = false;
   btnAddText.classList.toggle("active");
   movingRow.classList.toggle("textInputMode");
-  detailsViewMode = false;
-  document;
 });
 
 let addingNewText = false;
@@ -417,6 +426,7 @@ let detailsViewMode = false;
 let currentDateDisplay;
 
 btnViewDetails.addEventListener("click", (e) => {
+  clrOptions.forEach((item) => item.classList.remove("clrOption--current"));
   btnAddText.classList.remove("active");
   movingRow.classList.remove("textInputMode");
   btnViewDetails.classList.toggle("active");
@@ -442,7 +452,9 @@ detailsDelete.addEventListener("click", (e) => {
 
 detailsSavequit.addEventListener("click", (e) => {
   commentedDates[currentDateDisplay] = detailsText.innerText;
-  document.querySelector(`.daynum[data-date="${currentDateDisplay}"]`).dataset.comment = detailsText.innerText;
+  document.querySelector(
+    `.daynum[data-date="${currentDateDisplay}"]`
+  ).dataset.comment = detailsText.innerText;
   localStorage.setItem("commentedDates", JSON.stringify(commentedDates));
   detailsDisplay.style.display = "none";
 });

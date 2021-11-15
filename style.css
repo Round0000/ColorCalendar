@@ -287,6 +287,8 @@ body {
   margin-right: 1em;
 }
 
+
+
 .newTextForm input[type="submit"] {
   appearance: none;
   padding: .25em 1em;
@@ -296,14 +298,28 @@ body {
   cursor: pointer;
 }
 
+.newTextForm input[type="text"]:invalid ~ input[type="submit"] {
+  opacity: .5;
+}
+
+/* Input from Tim */
+
 #inputFromTim {
-  margin: 1em auto 4em;
+  margin: 1em auto 2em;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #111;
   outline: 2px solid #333;
   outline-offset: 2px;
+}
+
+#inputFromTim code {
+  display: none;
+}
+
+#inputFromTim:focus-within code {
+  display: initial;
 }
 
 #inputFromTim label {
@@ -313,14 +329,24 @@ body {
 #inputFromTim input[type='text'] {
   color: #222;
   background-color: snow;
-  padding: .5em;
   margin: .25em;
+  height: 36px;
+  padding: .4em;
+  font-family: inherit;
+  font-size: 1rem;
 }
 #inputFromTim input[type='submit'] {
-  color: #222;
-  background-color: snow;
+  appearance: none;
+  padding: .25em 1em;
+  background-color: #333;
+  border: 2px solid #dff;
+  color: #fff;
   cursor: pointer;
-  margin-left: 1em;
+  padding: .4em 1em;
+}
+
+#inputFromTim input[type="text"]:invalid ~ input[type="submit"] {
+  opacity: .5;
 }
 
 #inputFromTim code {
