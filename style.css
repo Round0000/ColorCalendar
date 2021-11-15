@@ -225,17 +225,18 @@ body {
 #export {
   margin: 1em;
   padding: 0.5em 1.25em;
-  background: linear-gradient(45deg, #ccc1, #222c);
   border: 1px solid #fff9;
   cursor: pointer;
 }
 
 #reset {
   color: orange;
+  background: linear-gradient(45deg, rgb(12, 4, 1), #0001);
 }
 
 #export {
   color: #3b82f6;
+  background: linear-gradient(45deg, #02050a, #0001);
 }
 
 /* Text Actions */
