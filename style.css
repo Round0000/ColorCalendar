@@ -227,6 +227,7 @@ body {
 .moving-row {
   overflow: hidden;
   display: grid;
+  position: relative;
 }
 
 .actionsmenu {
@@ -256,7 +257,6 @@ body {
 .actionsmenu button.active {
   background: linear-gradient(-90deg, #333, rgb(3, 37, 65));
   outline-color: white;
-  color: orange;
 }
 
 .newTextForm {
@@ -354,6 +354,71 @@ body {
   height: 8px;
   transform: rotate(45deg);
 }
+
+.detailsDisplay {
+  position: absolute;
+  /* background: linear-gradient(to top,#eee, #fff); */
+  background-color: #111;
+  color: #111;
+  font-size: 1rem;
+  padding: 0 .5em .5em;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  display: none;
+}
+
+.detailsDisplay h2 {
+  grid-column: 1 / -1;
+  grid-row: 1 / 2;
+  justify-self: center;
+  font-size: 1rem;
+  color: #333;
+  color: white;
+  align-self: center;
+}
+
+.detailsDisplay p {
+  grid-column: 1 / -1;
+  grid-row: 2 / 3;
+  border: 1px solid #2225;
+  padding: .5em;
+  font-size: .9rem;
+  box-shadow: inset 0 1px 4px #2222;
+  background-color: ghostwhite;
+  color: #222;
+  border-radius: 3px;
+}
+
+.detailsActions {
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+  align-self: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.detailsActions button {
+  all: unset;
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #fff9; */
+  border-radius: 100%;
+}
+
+.detailsActions svg {
+  pointer-events: none;
+}
+
+
 
 /* .daynum[data-comment]::after {
   position: fixed;

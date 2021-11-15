@@ -4,6 +4,18 @@
 //   navigator.serviceWorker.register("./sw.js");
 // }
 
+// UI
+const clrOptions = document.querySelectorAll(".clrOption");
+const btnPrev = document.querySelector(".btn-prev");
+const btnNext = document.querySelector(".btn-next");
+const detailsDisplay = document.querySelector(".detailsDisplay");
+const btnViewDetails = document.querySelector("button.viewDetails");
+const btnAddText = document.querySelector("button.addText");
+const movingRow = document.querySelector(".moving-row");
+const newTextForm = document.querySelector(".newTextForm");
+const detailsTitle = document.querySelector(".detailsDisplay h2");
+const detailsText = document.querySelector(".detailsDisplay p");
+
 // Data storage
 let markedDates = {};
 let commentedDates = {};
@@ -35,10 +47,6 @@ reset.addEventListener("click", () => {
 
 let currentClr = null;
 
-const clrOptions = document.querySelectorAll(".clrOption");
-const btnPrev = document.querySelector(".btn-prev");
-const btnNext = document.querySelector(".btn-next");
-
 btnPrev.addEventListener("click", (e) => {
   date.setMonth(date.getMonth() - 1);
   outputCal();
@@ -59,27 +67,27 @@ btnNext.addEventListener("click", (e) => {
   }, 300);
 });
 
-window.addEventListener('keydown', (event) => {
-  if (event.code === 'ArrowLeft') {
+window.addEventListener("keydown", (event) => {
+  if (event.code === "ArrowLeft") {
     date.setMonth(date.getMonth() - 1);
-  outputCal();
+    outputCal();
 
-  btnPrev.classList.add("anim-prev");
-  setTimeout(() => {
-    btnPrev.classList.remove("anim-prev");
-  }, 300);
+    btnPrev.classList.add("anim-prev");
+    setTimeout(() => {
+      btnPrev.classList.remove("anim-prev");
+    }, 300);
   }
 });
 
-window.addEventListener('keydown', (event) => {
-  if (event.code === 'ArrowRight') {
+window.addEventListener("keydown", (event) => {
+  if (event.code === "ArrowRight") {
     date.setMonth(date.getMonth() + 1);
-  outputCal();
+    outputCal();
 
-  btnNext.classList.add("anim-next");
-  setTimeout(() => {
-    btnNext.classList.remove("anim-next");
-  }, 300);
+    btnNext.classList.add("anim-next");
+    setTimeout(() => {
+      btnNext.classList.remove("anim-next");
+    }, 300);
   }
 });
 
@@ -96,6 +104,16 @@ document.addEventListener("click", (e) => {
       btnAddText.classList.remove("active");
       movingRow.classList.remove("textInputMode");
       newTextForm.reset();
+      return;
+    }
+
+    if (detailsViewMode) {
+      if (d.dataset.comment) {
+        currentDateDisplay = d.dataset.date;
+        detailsDisplay.style.display = "grid";
+        detailsTitle.innerText = d.dataset.date;
+        detailsText.innerText = d.dataset.comment;
+      }
       return;
     }
 
@@ -362,13 +380,12 @@ inputFromTim.addEventListener("submit", (e) => {
 
 // Text actions
 
-const btnAddText = document.querySelector("button.addText");
-const movingRow = document.querySelector(".moving-row");
-const newTextForm = document.querySelector(".newTextForm");
-
 btnAddText.addEventListener("click", (e) => {
+  btnViewDetails.classList.remove("active");
   btnAddText.classList.toggle("active");
   movingRow.classList.toggle("textInputMode");
+  detailsViewMode = false;
+  document;
 });
 
 let addingNewText = false;
@@ -394,3 +411,38 @@ const timeoScraper = () => {
   console.log("Les dates ci-dessous sont prêtes à être copiées : ");
   return arrayOfWorkdays;
 };
+
+// View Details
+let detailsViewMode = false;
+let currentDateDisplay;
+
+btnViewDetails.addEventListener("click", (e) => {
+  btnAddText.classList.remove("active");
+  movingRow.classList.remove("textInputMode");
+  btnViewDetails.classList.toggle("active");
+  detailsViewMode = !detailsViewMode;
+  if (!detailsViewMode) {
+    detailsDisplay.style.display = "none";
+  }
+});
+
+const detailsDelete = document.getElementById("removeDetails");
+const detailsSavequit = document.getElementById("savequitDetails");
+
+detailsDelete.addEventListener("click", (e) => {
+  console.log(commentedDates[currentDateDisplay]);
+  if (confirm("Êtes-vous sûr de vouloir supprimer cette note?")) {
+    delete commentedDates[currentDateDisplay];
+    console.log(commentedDates);
+    detailsDisplay.style.display = "none";
+    localStorage.setItem("commentedDates", JSON.stringify(commentedDates));
+    outputCal();
+  }
+});
+
+detailsSavequit.addEventListener("click", (e) => {
+  commentedDates[currentDateDisplay] = detailsText.innerText;
+  document.querySelector(`.daynum[data-date="${currentDateDisplay}"]`).dataset.comment = detailsText.innerText;
+  localStorage.setItem("commentedDates", JSON.stringify(commentedDates));
+  detailsDisplay.style.display = "none";
+});
