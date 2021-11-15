@@ -415,7 +415,7 @@ const inputFromTim = document.getElementById("inputFromTim");
 inputFromTim.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  let userStr = e.target.dataFromTim.value;
+  let userStr = e.target.dataFromTim.value.trim();
 
   if (userStr[0] === "[" && userStr.charAt(userStr.length - 1) === "]") {
     const importedData = JSON.parse(userStr);

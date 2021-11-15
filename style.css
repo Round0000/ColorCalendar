@@ -231,12 +231,12 @@ body {
 
 #reset {
   color: orange;
-  background: linear-gradient(45deg, rgb(12, 4, 1), #0001);
+  background: linear-gradient(15deg, rgb(12, 4, 1), #0001);
 }
 
 #export {
   color: #3b82f6;
-  background: linear-gradient(45deg, #02050a, #0001);
+  background: linear-gradient(15deg, #02050a, #0001);
 }
 
 /* Text Actions */
@@ -329,6 +329,12 @@ body {
   outline-offset: 2px;
 }
 
+#inputFromTim div {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+}
+
 #inputFromTim ul {
   list-style-type: none;
   text-align: left;
@@ -358,6 +364,7 @@ body {
   padding: 0.4em;
   font-family: inherit;
   font-size: 1rem;
+  flex: 1;
 }
 #inputFromTim input[type="submit"] {
   appearance: none;
@@ -505,17 +512,32 @@ body {
 }
 
 .importDataFromFile {
-  margin: 1em auto 2em;
+  margin: 1em auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #111;
   outline: 2px solid #333;
   outline-offset: 2px;
+  width: max-content;
+  padding: 0;
 }
 
 .importDataFromFile label {
   color: #eee;
+  /* margin: 1em; */
+  padding: 0.5em 1.25em;
+  border: 1px solid #fff9;
+  background: linear-gradient(15deg, rgb(1, 8, 1), #0009);
+  cursor: pointer;
+  position: relative;
+}
+
+.importDataFromFile label input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 /* Media queries */

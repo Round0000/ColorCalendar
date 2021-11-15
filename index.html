@@ -239,8 +239,10 @@
 
       <div class="admin d-none">
         <div class="importDataFromFile">
-          <label for="file-selector">Importer une sauvegarde</label>
-          <input type="file" id="file-selector" />
+          <label for="file-selector"
+            >Importer une sauvegarde
+            <input type="file" id="file-selector" />
+          </label>
         </div>
 
         <button id="export">Exporter les données</button>
@@ -275,8 +277,8 @@
               const timeoScraper = () => { let arrayOfWorkdays = [];
               document.querySelectorAll(".mat-card").forEach((day) => { if
               (day.style.backgroundColor === "white") {
-              arrayOfWorkdays.push(day.id); } }); console.log("Export disponible :
-              "); return arrayOfWorkdays; }; timeoScraper();
+              arrayOfWorkdays.push(day.id); } }); console.log("Export disponible
+              : "); return arrayOfWorkdays; }; timeoScraper();
             </code>
           </details>
         </form>
