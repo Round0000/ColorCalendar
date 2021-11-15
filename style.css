@@ -223,7 +223,14 @@ body {
 
 #reset {
   color: orange;
-  margin-bottom: 1em;
+  margin: 1em;
+  padding: .5em 1em;
+  background-color: #fff1;
+}
+
+#export {
+  color: #3b82f6;
+  margin: 1em;
   padding: .5em 1em;
   background-color: #fff1;
 }
@@ -403,7 +410,6 @@ body {
 
 .detailsDisplay {
   position: absolute;
-  /* background: linear-gradient(to top,#eee, #fff); */
   background-color: #111;
   color: #111;
   font-size: 1rem;
@@ -480,31 +486,15 @@ body {
   pointer-events: none;
 }
 
-
-
-/* .daynum[data-comment]::after {
-  position: fixed;
-  bottom: 40%;
-  left: 25%;
-  right: 25%;
-  content: attr(data-comment);
-  background-color: #fff;
-  padding: .5em .75em;
-  color: #222;
-  z-index: 10;
-  text-shadow: none;
-  font-size: .9rem;
-  min-height: 4em;
-  box-shadow: 0 2px 15px #fff5;
-  outline: 6px solid #fff3;
-  opacity: 0;
-  transition: all .3s;
+.importDataFromFile {
+  margin: 1em auto 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #111;
+  outline: 2px solid #333;
+  outline-offset: 2px;
 }
-
-.daynum[data-comment]:hover::after {
-  opacity: 1;
-} */
-
 
 
 /* Media queries */

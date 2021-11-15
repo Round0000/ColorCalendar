@@ -237,8 +237,10 @@
         </div>
       </div>
 
-      <div class="admin d-none">
-        <!-- <input type="file" id="file-selector" /> -->
+      <div class="admin">
+        <div class="importDataFromFile">
+          <input type="file" id="file-selector" />
+        </div>
         <form id="inputFromTim">
           <label for="dataFromTim">Importer planning de Timeo</label>
           <div>
@@ -270,6 +272,7 @@
             "); return arrayOfWorkdays; }; timeoScraper();
           </code>
         </form>
+        <button id="export">Exporter les données</button>
         <button id="reset">Effacer les données</button>
       </div>
     </div>

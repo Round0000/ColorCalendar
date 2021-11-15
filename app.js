@@ -18,23 +18,25 @@ const detailsTitle = document.querySelector(".detailsDisplay h2");
 const detailsText = document.querySelector(".detailsDisplay p");
 
 // Data storage
-let markedDates = {};
-let commentedDates = {};
+let userData = {
+  marks: {},
+  comments: {},
+};
 
 const saveDate = () => {
   document.querySelectorAll(".daynum").forEach((item) => {
     if (item.classList.length > 1) {
-      markedDates[item.dataset.date] =
+      userData.marks[item.dataset.date] =
         [item.classList[1]] +
         " " +
         [item.classList[2]] +
         " " +
         [item.classList[3]];
-    } else if (markedDates[item.dataset.date]) {
-      delete markedDates[item.dataset.date];
+    } else if (userData.marks[item.dataset.date]) {
+      delete userData.marks[item.dataset.date];
     }
   });
-  localStorage.setItem("markedDates", JSON.stringify(markedDates));
+  localStorage.setItem("userData", JSON.stringify(userData));
 };
 
 // Erase data from Local Storage
@@ -45,8 +47,8 @@ reset.addEventListener("click", () => {
       "Êtes-vous sûr de vouloir effacer toutes les données du calendrier?"
     )
   ) {
-    markedDates = {};
-    commentedDates = {};
+    userData.marks = {};
+    userData.comments = {};
     localStorage.clear();
     outputCal();
   }
@@ -128,10 +130,9 @@ document.addEventListener("click", (e) => {
 
   if (d.classList.contains("daynum")) {
     if (addingNewText && newTextForm.newtext.value.length > 0) {
-      console.log(newTextForm.newtext.value);
-      d.dataset.comment = newTextForm.newtext.value;
-      commentedDates[d.dataset.date] = d.dataset.comment;
-      localStorage.setItem("commentedDates", JSON.stringify(commentedDates));
+      d.dataset.comment = newTextForm.newtext.value.trim();
+      userData.comments[d.dataset.date] = d.dataset.comment;
+      localStorage.setItem("userData", JSON.stringify(userData));
       addingNewText = false;
       btnAddText.classList.remove("active");
       movingRow.classList.remove("textInputMode");
@@ -143,9 +144,12 @@ document.addEventListener("click", (e) => {
       if (d.dataset.comment) {
         currentDateDisplay = d.dataset.date;
         detailsDisplay.style.display = "grid";
-        detailsTitle.innerText = `${document.querySelector(`.daynum[data-date="${currentDateDisplay}"]`).textContent} ${
-          document.querySelector(".cal-header-month").textContent
-        } ${document.querySelector(".cal-header-year").textContent}`;
+        detailsTitle.innerText = `${
+          document.querySelector(`.daynum[data-date="${currentDateDisplay}"]`)
+            .textContent
+        } ${document.querySelector(".cal-header-month").textContent} ${
+          document.querySelector(".cal-header-year").textContent
+        }`;
         detailsText.innerText = d.dataset.comment;
       }
       return;
@@ -303,15 +307,13 @@ const outputCal = () => {
 
     pCurrent.dataset.date = `${date.getFullYear()}-${date.getMonth()}-${i}`;
 
-    console.log(commentedDates[pCurrent.dataset.date]);
-
-    if (commentedDates[pCurrent.dataset.date]) {
-      pCurrent.dataset.comment = commentedDates[pCurrent.dataset.date];
+    if (userData.comments[pCurrent.dataset.date]) {
+      pCurrent.dataset.comment = userData.comments[pCurrent.dataset.date];
     }
 
-    if (markedDates[pCurrent.dataset.date]) {
+    if (userData.marks[pCurrent.dataset.date]) {
       pCurrent.classList.value =
-        "daynum" + " " + markedDates[pCurrent.dataset.date];
+        "daynum" + " " + userData.marks[pCurrent.dataset.date];
     } else {
       pCurrent.classList.add("daynum");
     }
@@ -353,14 +355,9 @@ const outputCal = () => {
 };
 
 // Initial Calendar Output
-if (localStorage.getItem("markedDates")) {
-  markedDates = JSON.parse(
-    localStorage.getItem("markedDates", JSON.stringify(markedDates))
-  );
-}
-if (localStorage.getItem("commentedDates")) {
-  commentedDates = JSON.parse(
-    localStorage.getItem("commentedDates", JSON.stringify(commentedDates))
+if (localStorage.getItem("userData")) {
+  userData = JSON.parse(
+    localStorage.getItem("userData", JSON.stringify(userData))
   );
 }
 
@@ -370,33 +367,41 @@ outputCal();
 const thisIsANewDay = (item) => {
   const date = new Date(item);
   let dateToMark =
-    markedDates[`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`];
+    userData.marks[
+      `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+    ];
 
   if (!dateToMark) {
-    markedDates[`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`] =
-      "clrRed";
+    userData.marks[
+      `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+    ] = "clrRed";
   } else if (!dateToMark.includes("clrRed")) {
-    markedDates[`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`] =
-      "clrRed" + " " + dateToMark;
-    console.log("weshweshsshssh");
+    userData.marks[
+      `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+    ] = "clrRed" + " " + dateToMark;
   }
 };
 
-// const fileSelector = document.getElementById("file-selector");
-// fileSelector.addEventListener("change", (event) => {
-//   const fileList = event.target.files;
-//   readFile(fileList[0]);
-// });
+const fileSelector = document.getElementById("file-selector");
+fileSelector.addEventListener("change", (event) => {
+  const fileList = event.target.files;
+  readFile(fileList[0]);
+});
 
 function readFile(file) {
   const reader = new FileReader();
   reader.readAsText(file);
 
   reader.onload = function () {
-    JSON.parse(reader.result).forEach((item) => {
-      thisIsANewDay(item);
-    });
-    localStorage.setItem("markedDates", JSON.stringify(markedDates));
+    if (JSON.parse(reader.result)) {
+      console.log("Importation réussie !");
+
+      localStorage.setItem("userData", reader.result);
+      userData = JSON.parse(
+        localStorage.getItem("userData", JSON.stringify(userData))
+      );
+    }
+
     outputCal();
   };
 
@@ -421,7 +426,7 @@ inputFromTim.addEventListener("submit", (e) => {
       thisIsANewDay(date);
     });
 
-    localStorage.setItem("markedDates", JSON.stringify(markedDates));
+    localStorage.setItem("userData", JSON.stringify(userData));
     outputCal();
 
     console.log("Données correctement importées !");
@@ -447,7 +452,6 @@ newTextForm.addEventListener("submit", (e) => {
 
   if (newTextForm.newtext.value.length > 0) {
     addingNewText = true;
-    console.log(e.target.newtext.value);
   }
 });
 
@@ -483,26 +487,42 @@ const detailsDelete = document.getElementById("removeDetails");
 const detailsSavequit = document.getElementById("savequitDetails");
 
 detailsDelete.addEventListener("click", (e) => {
-  console.log(commentedDates[currentDateDisplay]);
   if (confirm("Êtes-vous sûr de vouloir supprimer cette note?")) {
-    delete commentedDates[currentDateDisplay];
-    console.log(commentedDates);
+    delete userData.comments[currentDateDisplay];
     detailsDisplay.style.display = "none";
-    localStorage.setItem("commentedDates", JSON.stringify(commentedDates));
+    localStorage.setItem("userData", JSON.stringify(userData));
     outputCal();
   }
 });
 
 detailsSavequit.addEventListener("click", (e) => {
-  commentedDates[currentDateDisplay] = detailsText.innerText;
+  userData.comments[currentDateDisplay] = detailsText.innerText;
   document.querySelector(
     `.daynum[data-date="${currentDateDisplay}"]`
   ).dataset.comment = detailsText.innerText;
-  localStorage.setItem("commentedDates", JSON.stringify(commentedDates));
+  localStorage.setItem("userData", JSON.stringify(userData));
   detailsDisplay.style.display = "none";
 });
 
 btnOpenSettings.addEventListener("click", (e) => {
   document.querySelector(".admin").classList.toggle("d-none");
   btnOpenSettings.classList.toggle("active");
+});
+
+// Export User Data
+
+function exportData() {
+  let data = JSON.stringify(userData);
+  let hiddenElement = document.createElement("a");
+
+  hiddenElement.href = "data:attachment/text," + encodeURI(data);
+  hiddenElement.target = "_blank";
+  hiddenElement.download = `export-ColorCalendar.json`;
+  hiddenElement.click();
+}
+
+const exportBtn = document.getElementById("export");
+
+exportBtn.addEventListener("click", (e) => {
+  exportData();
 });
