@@ -10,7 +10,7 @@ const btnPrev = document.querySelector(".btn-prev");
 const btnNext = document.querySelector(".btn-next");
 const detailsDisplay = document.querySelector(".detailsDisplay");
 const btnViewDetails = document.querySelector(".viewDetails");
-const btnOpenSettings = document.querySelector('.openSettings');
+const btnOpenSettings = document.querySelector(".openSettings");
 const btnAddText = document.querySelector("button.addText");
 const movingRow = document.querySelector(".moving-row");
 const newTextForm = document.querySelector(".newTextForm");
@@ -63,6 +63,12 @@ btnPrev.addEventListener("click", (e) => {
   setTimeout(() => {
     btnPrev.classList.remove("anim-prev");
   }, 300);
+
+  btnViewDetails.classList.remove("active");
+  detailsViewMode = false;
+  if (!detailsViewMode) {
+    detailsDisplay.style.display = "none";
+  }
 });
 
 btnNext.addEventListener("click", (e) => {
@@ -73,6 +79,12 @@ btnNext.addEventListener("click", (e) => {
   setTimeout(() => {
     btnNext.classList.remove("anim-next");
   }, 300);
+
+  btnViewDetails.classList.remove("active");
+  detailsViewMode = false;
+  if (!detailsViewMode) {
+    detailsDisplay.style.display = "none";
+  }
 });
 
 window.addEventListener("keydown", (event) => {
@@ -84,6 +96,12 @@ window.addEventListener("keydown", (event) => {
     setTimeout(() => {
       btnPrev.classList.remove("anim-prev");
     }, 300);
+
+    btnViewDetails.classList.remove("active");
+    detailsViewMode = false;
+    if (!detailsViewMode) {
+      detailsDisplay.style.display = "none";
+    }
   }
 });
 
@@ -96,6 +114,12 @@ window.addEventListener("keydown", (event) => {
     setTimeout(() => {
       btnNext.classList.remove("anim-next");
     }, 300);
+
+    btnViewDetails.classList.remove("active");
+    detailsViewMode = false;
+    if (!detailsViewMode) {
+      detailsDisplay.style.display = "none";
+    }
   }
 });
 
@@ -119,7 +143,9 @@ document.addEventListener("click", (e) => {
       if (d.dataset.comment) {
         currentDateDisplay = d.dataset.date;
         detailsDisplay.style.display = "grid";
-        detailsTitle.innerText = d.dataset.date;
+        detailsTitle.innerText = `${document.querySelector(`.daynum[data-date="${currentDateDisplay}"]`).textContent} ${
+          document.querySelector(".cal-header-month").textContent
+        } ${document.querySelector(".cal-header-year").textContent}`;
         detailsText.innerText = d.dataset.comment;
       }
       return;
@@ -165,6 +191,47 @@ const colors = {
   clrPurple: "#7c3aed",
   clrPink: "#ec4899",
 };
+
+// Months and days names
+const months = [
+  "Janvier",
+  "Février",
+  "Mars",
+  "Avril",
+  "Mai",
+  "Juin",
+  "Juillet",
+  "Août",
+  "Septembre",
+  "Octobre",
+  "Novembre",
+  "Décembre",
+];
+
+const monthsShort = [
+  "Janv.",
+  "Févr.",
+  "Mars",
+  "Avr.",
+  "Mai",
+  "Juin",
+  "Juil.",
+  "Août",
+  "Sept.",
+  "Oct.",
+  "Nov.",
+  "Déc.",
+];
+
+const daynames = [
+  "Dimanche",
+  "Lundi",
+  "Mardi",
+  "Mercredi",
+  "Jeudi",
+  "Vendredi",
+  "Samedi",
+];
 
 //
 // Date management
@@ -215,31 +282,6 @@ const outputCal = () => {
   //   "November",
   //   "December",
   // ];
-
-  const months = [
-    "Janvier",
-    "Février",
-    "Mars",
-    "Avril",
-    "Mai",
-    "Juin",
-    "Juillet",
-    "Août",
-    "Septembre",
-    "Octobre",
-    "Novembre",
-    "Décembre",
-  ];
-
-  const daynames = [
-    "Dimanche",
-    "Lundi",
-    "Mardi",
-    "Mercredi",
-    "Jeudi",
-    "Vendredi",
-    "Samedi",
-  ];
 
   const month = date.getMonth();
 
@@ -460,6 +502,7 @@ detailsSavequit.addEventListener("click", (e) => {
   detailsDisplay.style.display = "none";
 });
 
-btnOpenSettings.addEventListener('click', e => {
-  document.querySelector('.admin').classList.toggle('d-none');
-})
+btnOpenSettings.addEventListener("click", (e) => {
+  document.querySelector(".admin").classList.toggle("d-none");
+  btnOpenSettings.classList.toggle("active");
+});

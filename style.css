@@ -428,6 +428,8 @@ body {
   color: #333;
   color: white;
   align-self: center;
+  padding: 0 .2em;
+  background: linear-gradient(to top, rgba(255, 166, 0, 0.185) 25%, transparent 0);
 }
 
 .detailsDisplay p {
@@ -440,6 +442,8 @@ body {
   background-color: ghostwhite;
   color: #222;
   border-radius: 3px;
+  height: 5em;
+  overflow: hidden;
 }
 
 .detailsActions {
@@ -456,8 +460,20 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: #fff9; */
   border-radius: 100%;
+}
+
+.detailsActions button span {
+  color: #eee;
+  padding: .5em;
+  font-size: .9rem;
+}
+
+#removeDetails span {
+  color: #ef4444;
+}
+#savequitDetails span {
+  color: #10b981;
 }
 
 .detailsActions svg {
