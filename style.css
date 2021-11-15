@@ -321,12 +321,21 @@ body {
   outline-offset: 2px;
 }
 
-#inputFromTim code {
-  display: none;
+#inputFromTim ul {
+  list-style-type: none;
+  text-align: left;
 }
 
-#inputFromTim:focus-within code {
-  display: initial;
+#inputFromTim li {
+  color: #ddd;
+  font-size: .9rem;
+  padding: .25em .5em;
+}
+
+#inputFromTim li em {
+  padding: 0;
+  color: orange;
+  font-style: normal;
 }
 
 #inputFromTim label {
