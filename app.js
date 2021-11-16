@@ -361,6 +361,13 @@ if (localStorage.getItem("userData")) {
   );
 }
 
+// Next lines to be deleted, old data structure
+if (localStorage.getItem("markedDates")) {
+  userData.marks = JSON.parse(
+    localStorage.getItem("markedDates", JSON.stringify(userData.marks))
+  );
+}
+
 outputCal();
 
 // Tim
