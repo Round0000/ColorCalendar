@@ -518,6 +518,12 @@ btnOpenSettings.addEventListener("click", (e) => {
   btnOpenSettings.classList.toggle("active");
 });
 
+const btnCloseAdmin = document.getElementById("closeAdmin");
+btnCloseAdmin.addEventListener("click", (e) => {
+  document.querySelector(".admin").classList.add("d-none");
+  btnOpenSettings.classList.remove("active");
+});
+
 // Export User Data
 
 function exportData() {

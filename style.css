@@ -33,6 +33,7 @@ body {
   width: 100%;
   max-width: 600px;
   margin: auto;
+  position: relative;
 }
 
 .cal-header {
@@ -208,9 +209,17 @@ body {
 /*  */
 
 .admin {
-  margin-top: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to bottom, #000 50vh, #000c, #0008);
   text-align: center;
   padding-bottom: 2em;
+  backdrop-filter: blur(6px);
+  z-index: 11;
+  padding: 1em 0;
+  height: 85vh;
 }
 
 .admin * {
@@ -219,6 +228,44 @@ body {
   color: #fff3;
   background-color: transparent;
   border: none;
+}
+
+.admin h2 {
+  color: #fff;
+  display: inline-block;
+  border-bottom: 2px solid #111;
+  margin-bottom: 1em;
+  position: relative;
+}
+
+.admin h2::before,
+.admin h2::after {
+  content: "";
+  position: absolute;
+  transform: translateY(-50%) rotate(45deg);
+  background-color: #fff;
+  width: 6px;
+  height: 6px;
+}
+
+.admin h2::before {
+  left: 0;
+  top: 50%;
+}
+.admin h2::after {
+  right: 0;
+  top: 50%;
+}
+
+#closeAdmin {
+  cursor: pointer;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  background-image: url(/img/close.svg);
+  background-size: 100%;
 }
 
 #reset,
