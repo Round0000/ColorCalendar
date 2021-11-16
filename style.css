@@ -274,6 +274,8 @@ body {
   padding: 0.5em 1.25em;
   border: 1px solid #fff9;
   cursor: pointer;
+  width: 16em;
+  border-radius: 6px;
 }
 
 #reset {
@@ -563,20 +565,21 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #111;
-  outline: 2px solid #333;
   outline-offset: 2px;
   width: max-content;
   padding: 0;
+  width: 16em;
 }
 
 .importDataFromFile label {
   color: #eee;
   /* margin: 1em; */
   padding: 0.5em 1.25em;
-  border: 1px solid #fff9;
   background: linear-gradient(15deg, rgb(1, 8, 1), #0009);
   cursor: pointer;
+  width: 16em;
+  border: 1px solid #fff9;
+  border-radius: 6px;
   position: relative;
 }
 
