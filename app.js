@@ -431,14 +431,18 @@ const inputFromTim = document.getElementById("inputFromTim");
 inputFromTim.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  let userStr = e.target.dataFromTim.value.trim();
+  let userStr = e.target.dataFromTim.value.replace(/\s/g, "");
 
   if (userStr[0] === "[" && userStr.charAt(userStr.length - 1) === "]") {
     const importedData = JSON.parse(userStr);
 
+    let yearOfImport = userStr.slice(2, 6);
 
     for (const key in userData.marks) {
-      if (userData.marks[key].includes("clrTim")) {
+      if (
+        userData.marks[key].includes("clrTim") &&
+        key.includes(yearOfImport)
+      ) {
         let currData = userData.marks[key].split("clrTim");
         let newData = currData[1].trim();
         userData.marks[key] = newData;
