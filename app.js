@@ -21,6 +21,7 @@ const detailsText = document.querySelector(".detailsDisplay p");
 let userData = {
   marks: {},
   comments: {},
+  timColor: "clrYellow",
 };
 
 const saveDate = () => {
@@ -49,7 +50,11 @@ reset.addEventListener("click", () => {
   ) {
     userData.marks = {};
     userData.comments = {};
-    localStorage.clear();
+    userData.timColor = "clrRed";
+    document.querySelector(".admin").classList.add("d-none");
+    btnOpenSettings.classList.remove("active");
+
+    localStorage.setItem("userData", JSON.stringify(userData));
     outputCal();
   }
 });
@@ -318,6 +323,10 @@ const outputCal = () => {
       pCurrent.classList.add("daynum");
     }
 
+    if (pCurrent.classList.contains("clrTim")) {
+      pCurrent.classList.replace("clrTim", userData.timColor);
+    }
+
     if (pCurrent.classList.length === 3) {
       pCurrent.style.background = `linear-gradient(-45deg, ${
         colors[pCurrent.classList[1]]
@@ -381,11 +390,11 @@ const thisIsANewDay = (item) => {
   if (!dateToMark) {
     userData.marks[
       `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
-    ] = "clrRed";
-  } else if (!dateToMark.includes("clrRed")) {
+    ] = "clrTim";
+  } else if (!dateToMark.includes("clrTim")) {
     userData.marks[
       `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
-    ] = "clrRed" + " " + dateToMark;
+    ] = "clrTim" + " " + dateToMark;
   }
 };
 
@@ -427,7 +436,14 @@ inputFromTim.addEventListener("submit", (e) => {
   if (userStr[0] === "[" && userStr.charAt(userStr.length - 1) === "]") {
     const importedData = JSON.parse(userStr);
 
-    console.log(importedData);
+
+    for (const key in userData.marks) {
+      if (userData.marks[key].includes("clrTim")) {
+        let currData = userData.marks[key].split("clrTim");
+        let newData = currData[1].trim();
+        userData.marks[key] = newData;
+      }
+    }
 
     e.target.reset();
 
@@ -516,6 +532,26 @@ detailsSavequit.addEventListener("click", (e) => {
 btnOpenSettings.addEventListener("click", (e) => {
   document.querySelector(".admin").classList.toggle("d-none");
   btnOpenSettings.classList.toggle("active");
+  document.querySelectorAll(".timClrOpt--current").forEach((item) => {
+    item.classList.remove("timClrOpt--current");
+  });
+  document
+    .querySelector(`.timClrOpt[data-clr="${userData.timColor}"]`)
+    .classList.add("timClrOpt--current");
+});
+
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("timClrOpt")) {
+    userData.timColor = e.target.dataset.clr;
+    localStorage.setItem("userData", JSON.stringify(userData));
+    document.querySelectorAll(".timClrOpt--current").forEach((item) => {
+      item.classList.remove("timClrOpt--current");
+    });
+
+    document
+      .querySelector(`.timClrOpt[data-clr="${userData.timColor}"]`)
+      .classList.add("timClrOpt--current");
+  }
 });
 
 const btnCloseAdmin = document.getElementById("closeAdmin");

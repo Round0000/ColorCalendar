@@ -239,7 +239,10 @@
 
       <div class="admin d-none">
         <h2>Administration</h2>
-        <button id="closeAdmin" aria-label="Fermer panel d'administration"></button>
+        <button
+          id="closeAdmin"
+          aria-label="Fermer panel d'administration"
+        ></button>
         <div class="importDataFromFile">
           <label for="file-selector"
             >Importer une sauvegarde
@@ -250,12 +253,29 @@
         <button id="export">Exporter les données</button>
         <button id="reset">Effacer les données</button>
 
+        
+
         <form id="inputFromTim" class="">
           <label for="dataFromTim">Importer planning de Timeo</label>
+
           <div>
             <input type="text" required name="dataFromTim" id="dataFromTim" />
             <input type="submit" value="OK" />
           </div>
+
+          <div class="timColorMenu">
+            <p>Couleur pour les jours importés de Timeo</p>
+            <div class="timColorOptions">
+              <div data-clr="clrGray" class="clrGray timClrOpt"></div>
+              <div data-clr="clrRed" class="clrRed timClrOpt"></div>
+              <div data-clr="clrYellow" class="clrYellow timClrOpt"></div>
+              <div data-clr="clrGreen" class="clrGreen timClrOpt"></div>
+              <div data-clr="clrBlue" class="clrBlue timClrOpt"></div>
+              <div data-clr="clrPurple" class="clrPurple timClrOpt"></div>
+              <div data-clr="clrPink" class="clrPink timClrOpt"></div>
+            </div>
+          </div>
+
           <details>
             <summary>Voir les instructions</summary>
             <ul>
