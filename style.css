@@ -531,7 +531,6 @@ body {
   z-index: 10;
   display: grid;
   grid-template-columns: 1fr auto;
-  display: none;
 }
 
 .detailsDisplay h2 {
@@ -578,7 +577,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 100%;
+  cursor: pointer;
+}
+
+.detailsActions button:hover span {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
 }
 
 .detailsActions button span {

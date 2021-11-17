@@ -74,7 +74,7 @@ btnPrev.addEventListener("click", (e) => {
   btnViewDetails.classList.remove("active");
   detailsViewMode = false;
   if (!detailsViewMode) {
-    detailsDisplay.style.display = "none";
+    detailsDisplay.classList.add('d-none');
   }
 });
 
@@ -90,7 +90,7 @@ btnNext.addEventListener("click", (e) => {
   btnViewDetails.classList.remove("active");
   detailsViewMode = false;
   if (!detailsViewMode) {
-    detailsDisplay.style.display = "none";
+    detailsDisplay.classList.add('d-none');
   }
 });
 
@@ -107,7 +107,7 @@ window.addEventListener("keydown", (event) => {
     btnViewDetails.classList.remove("active");
     detailsViewMode = false;
     if (!detailsViewMode) {
-      detailsDisplay.style.display = "none";
+      detailsDisplay.classList.add('d-none');
     }
   }
 });
@@ -125,8 +125,14 @@ window.addEventListener("keydown", (event) => {
     btnViewDetails.classList.remove("active");
     detailsViewMode = false;
     if (!detailsViewMode) {
-      detailsDisplay.style.display = "none";
+      detailsDisplay.classList.add('d-none');
     }
+  }
+});
+
+document.addEventListener("click", (e) => {
+  if (e.target.querySelector(".container")) {
+    detailsDisplay.classList.add('d-none');
   }
 });
 
@@ -148,7 +154,7 @@ document.addEventListener("click", (e) => {
     if (detailsViewMode) {
       if (d.dataset.comment) {
         currentDateDisplay = d.dataset.date;
-        detailsDisplay.style.display = "grid";
+        detailsDisplay.classList.remove('d-none');
         detailsTitle.innerText = `${
           document.querySelector(`.daynum[data-date="${currentDateDisplay}"]`)
             .textContent
@@ -508,7 +514,7 @@ btnViewDetails.addEventListener("click", (e) => {
   btnViewDetails.classList.toggle("active");
   detailsViewMode = !detailsViewMode;
   if (!detailsViewMode) {
-    detailsDisplay.style.display = "none";
+    detailsDisplay.classList.add('d-none');
   }
 });
 
@@ -518,7 +524,7 @@ const detailsSavequit = document.getElementById("savequitDetails");
 detailsDelete.addEventListener("click", (e) => {
   if (confirm("Êtes-vous sûr de vouloir supprimer cette note?")) {
     delete userData.comments[currentDateDisplay];
-    detailsDisplay.style.display = "none";
+    detailsDisplay.classList.add('d-none');
     localStorage.setItem("userData", JSON.stringify(userData));
     outputCal();
   }
@@ -530,7 +536,7 @@ detailsSavequit.addEventListener("click", (e) => {
     `.daynum[data-date="${currentDateDisplay}"]`
   ).dataset.comment = detailsText.innerText;
   localStorage.setItem("userData", JSON.stringify(userData));
-  detailsDisplay.style.display = "none";
+  detailsDisplay.classList.add('d-none');
 });
 
 btnOpenSettings.addEventListener("click", (e) => {
