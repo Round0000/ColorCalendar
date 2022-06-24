@@ -74,7 +74,7 @@ btnPrev.addEventListener("click", (e) => {
   btnViewDetails.classList.remove("active");
   detailsViewMode = false;
   if (!detailsViewMode) {
-    detailsDisplay.classList.add('d-none');
+    detailsDisplay.classList.add("d-none");
   }
 });
 
@@ -90,7 +90,7 @@ btnNext.addEventListener("click", (e) => {
   btnViewDetails.classList.remove("active");
   detailsViewMode = false;
   if (!detailsViewMode) {
-    detailsDisplay.classList.add('d-none');
+    detailsDisplay.classList.add("d-none");
   }
 });
 
@@ -107,7 +107,7 @@ window.addEventListener("keydown", (event) => {
     btnViewDetails.classList.remove("active");
     detailsViewMode = false;
     if (!detailsViewMode) {
-      detailsDisplay.classList.add('d-none');
+      detailsDisplay.classList.add("d-none");
     }
   }
 });
@@ -125,14 +125,14 @@ window.addEventListener("keydown", (event) => {
     btnViewDetails.classList.remove("active");
     detailsViewMode = false;
     if (!detailsViewMode) {
-      detailsDisplay.classList.add('d-none');
+      detailsDisplay.classList.add("d-none");
     }
   }
 });
 
 document.addEventListener("click", (e) => {
   if (e.target.querySelector(".container")) {
-    detailsDisplay.classList.add('d-none');
+    detailsDisplay.classList.add("d-none");
   }
 });
 
@@ -147,6 +147,8 @@ document.addEventListener("click", (e) => {
       addingNewText = false;
       btnAddText.classList.remove("active");
       movingRow.classList.remove("textInputMode");
+      newTextForm_instruction.style.opacity = "0";
+      newTextForm_instruction.style.height = "0";
       newTextForm.reset();
       return;
     }
@@ -154,7 +156,7 @@ document.addEventListener("click", (e) => {
     if (detailsViewMode) {
       if (d.dataset.comment) {
         currentDateDisplay = d.dataset.date;
-        detailsDisplay.classList.remove('d-none');
+        detailsDisplay.classList.remove("d-none");
         detailsTitle.innerText = `${
           document.querySelector(`.daynum[data-date="${currentDateDisplay}"]`)
             .textContent
@@ -300,8 +302,7 @@ const outputCal = () => {
 
   const month = date.getMonth();
 
-  document.querySelector(".cal-header-month").innerHTML =
-    months[month];
+  document.querySelector(".cal-header-month").innerHTML = months[month];
   document.querySelector(".cal-header-year").innerHTML = date.getFullYear();
 
   let days = [];
@@ -478,6 +479,8 @@ btnAddText.addEventListener("click", (e) => {
   detailsViewMode = false;
   btnAddText.classList.toggle("active");
   movingRow.classList.toggle("textInputMode");
+  newTextForm_instruction.style.opacity = "1";
+  newTextForm_instruction.style.height = "auto";
 });
 
 let addingNewText = false;
@@ -514,7 +517,7 @@ btnViewDetails.addEventListener("click", (e) => {
   btnViewDetails.classList.toggle("active");
   detailsViewMode = !detailsViewMode;
   if (!detailsViewMode) {
-    detailsDisplay.classList.add('d-none');
+    detailsDisplay.classList.add("d-none");
   }
 });
 
@@ -524,7 +527,7 @@ const detailsSavequit = document.getElementById("savequitDetails");
 detailsDelete.addEventListener("click", (e) => {
   if (confirm("Êtes-vous sûr de vouloir supprimer cette note?")) {
     delete userData.comments[currentDateDisplay];
-    detailsDisplay.classList.add('d-none');
+    detailsDisplay.classList.add("d-none");
     localStorage.setItem("userData", JSON.stringify(userData));
     outputCal();
   }
@@ -536,7 +539,7 @@ detailsSavequit.addEventListener("click", (e) => {
     `.daynum[data-date="${currentDateDisplay}"]`
   ).dataset.comment = detailsText.innerText;
   localStorage.setItem("userData", JSON.stringify(userData));
-  detailsDisplay.classList.add('d-none');
+  detailsDisplay.classList.add("d-none");
 });
 
 btnOpenSettings.addEventListener("click", (e) => {
@@ -549,6 +552,12 @@ btnOpenSettings.addEventListener("click", (e) => {
     .querySelector(`.timClrOpt[data-clr="${userData.timColor}"]`)
     .classList.add("timClrOpt--current");
 });
+
+document.addEventListener('keyup', e => {
+  if (e.key === "Escape") {
+    document.querySelector(".admin").classList.add("d-none");
+  }
+})
 
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("timClrOpt")) {
