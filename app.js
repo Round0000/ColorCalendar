@@ -268,7 +268,7 @@ const outputCal = () => {
   ).getDate();
   // Modify next line to set week's first day //
   const firstDayIndex = date.getDay() - 1 < 0 ? 6 : date.getDay() - 1;
-  
+
   const lastDayIndex = new Date(
     date.getFullYear(),
     date.getMonth() + 1,
@@ -281,8 +281,6 @@ const outputCal = () => {
   } else {
     nextDays = 7 - lastDayIndex;
   }
-
-  console.log(nextDays)
 
   // Months in english
   // const months = [
